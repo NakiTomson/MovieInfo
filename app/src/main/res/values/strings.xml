@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">MovieInfo</string>
+
+
+    <string name="nav_header_desc">Navigation header</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_settings">settings</string>
+    <string name="image_poster">poster</string>
+
+
+    <string-array name="tabs">
+        <item>Popular</item>
+        <item>Rated</item>
+        <item>Tv</item>
+    </string-array>
+
+
+
+
+    <string name="title_movie">Jumanji: a New level</string>
+    <string name="_2019">2019</string>
+    <string name="_2_2">2 h, 2 m</string>
+    <string name="age_range">age_range</string>
+    <string name="_7_4">7.4/</string>
+    <string name="_10">10</string>
+    <string name="gander">militant</string>
+    <string name="gander2">comedy</string>
+    <string name="gander3">adventures</string>
+    <string name="gander4">fantasy</string>
+    <string name="release_date">release date</string>
+    <string name="voit_count">2,5 k votes</string>
+    <string name="movie">Movie</string>
+
+
+
+    <string name="indicator_movie">indicator_movie</string>
+    <string name="description_movie">Another film from the continuation of Star Wars to the delight of fans, all fans of this epic around the world were looking forward to the premiere, such queues and box office has not been observed for a long time, all tickets were sold out in a few minutes, the halls were full of sold-out. In our cinema, you can watch in a good atmosphere at home, in excellent quality, for example, under a delicious hookah or fresh popcorn. Sit down more comfortably and immerse yourself with pleasure in the world of galactic battles</string>
+    <string name="indicator_calendar">indicator_calendar</string>
+    <string name="indicator_dollar">indicator_dollar</string>
+    <string name="budget">Бюджет:</string>
+    <string name="money_info">100000 $</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="next">Next</string>
+    <string name="skip_registration">skip</string>
+
+
+</resources>

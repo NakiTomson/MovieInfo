@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:id="@+id/card_info"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/poster_image"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/poster"
+            app:layout_collapseMode= "parallax"
+            android:contentDescription="@string/image_poster"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline2"
+            />
+
+        <TextView
+            android:id="@+id/name_movie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:text="@string/title_movie"
+            android:textSize="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/poster_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/runtime_movie"
+            android:layout_width="70dp"
+            android:paddingStart="5dp"
+            android:textSize="16dp"
+            android:layout_height="wrap_content"
+            android:text="@string/_2_2"
+            app:layout_constraintStart_toStartOf="@+id/name_movie"
+            app:layout_constraintTop_toBottomOf="@+id/name_movie" />
+
+        <TextView
+            android:id="@+id/release_date"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/_2019"
+            android:maxLength="4"
+            android:textSize="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/name_movie"
+            app:layout_constraintStart_toEndOf="@+id/selector"
+            tools:layout_editor_absoluteX="291dp" />
+
+        <ImageView
+            android:id="@+id/selector"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/indicator_selecrtor"
+            app:layout_constraintBottom_toBottomOf="@+id/runtime_movie"
+            app:layout_constraintStart_toEndOf="@+id/runtime_movie"
+            app:layout_constraintTop_toTopOf="@+id/runtime_movie" />
+
+        <ImageView
+            android:id="@+id/selector2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/indicator_selecrtor"
+            app:layout_constraintBottom_toBottomOf="@+id/runtime_movie"
+            app:layout_constraintStart_toEndOf="@+id/release_date"
+            app:layout_constraintTop_toTopOf="@+id/runtime_movie" />
+
+        <TextView
+            android:id="@+id/age_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12+"
+            android:padding="2dp"
+            android:contentDescription="@string/age_range"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintStart_toEndOf="@+id/selector2"
+            app:layout_constraintTop_toBottomOf="@+id/name_movie"
+            tools:layout_editor_absoluteX="319dp"
+            tools:layout_editor_absoluteY="37dp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="false"
+            android:numStars="10"
+            android:layout_marginStart="4dp"
+            android:progressTint="@color/gradient_end_color"
+            android:rating="7.4"
+            android:stepSize="0.1"
+            app:layout_constraintStart_toStartOf="@+id/name_movie"
+            app:layout_constraintTop_toBottomOf="@+id/runtime_movie" />
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_star_add"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/_7_4"
+            android:layout_marginStart="4dp"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/name_movie"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/rating_max"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:text="@string/_10"
+            android:textSize="16dp"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/rating"
+            app:layout_constraintStart_toEndOf="@+id/rating"
+            app:layout_constraintTop_toTopOf="@+id/rating" />
+
+        <ImageView
+            android:id="@+id/selector3"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/indicator_selecrtor"
+            app:layout_constraintStart_toEndOf="@+id/rating_max"
+            app:layout_constraintBottom_toBottomOf="@+id/rating_max"
+            app:layout_constraintTop_toTopOf="@+id/rating_max"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/vote_count"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/voit_count"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/selector3"
+            app:layout_constraintTop_toTopOf="@+id/rating_max" />
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/gander_gray"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginStart="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/gander"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/rating" />
+
+
+        <TextView
+            android:id="@+id/gender2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@color/gander_gray"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/gander2"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/gender"
+            app:layout_constraintStart_toEndOf="@+id/gender"
+            app:layout_constraintTop_toTopOf="@+id/gender"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/gender3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/gander_gray"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/gander3"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/name_movie"
+            app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+        <TextView
+            android:id="@+id/gender4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@color/gander_gray"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/gander4"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/gender3"
+            app:layout_constraintStart_toEndOf="@+id/gender3"
+            app:layout_constraintTop_toTopOf="@+id/gender3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="163dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

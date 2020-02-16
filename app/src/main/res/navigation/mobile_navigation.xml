@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_movie">
+
+    <fragment
+        android:id="@+id/nav_movie"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.movie.MovieSectionFragment"
+        android:label="MovieFragment"
+        tools:layout="@layout/fragment_movie"
+        >
+        <action
+            android:id="@+id/action_nav_movie_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment"
+            app:popUpTo="@+id/nav_movie" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_favorite_movie"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.favorite.FavoriteFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"
+        />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"
+        />
+    <fragment
+        android:id="@+id/nav_exit"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.exit.ExitFragment"
+        android:label="ExitFragment"
+        tools:layout="@layout/fragment_exit"
+        />
+    <fragment
+        android:id="@+id/detailMovieFragment"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.detail_movie.DetailMovieFragment"
+        android:label="DetailMovieFragment">
+
+        <argument
+            android:name="title_movie"
+            app:argType="string"
+            />
+        <argument
+            android:name="poster_path"
+            app:argType="string" />
+
+        <argument
+            android:name="backdrop_path"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="year_start"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="vote_count"
+            app:argType="integer"
+            />
+
+        <argument
+            android:name="id"
+            app:argType="integer"
+            />
+        <argument
+            android:name="vote_average"
+            app:argType="float"
+            />
+        <argument
+            android:name="overview"
+            app:argType="string"
+            />
+    </fragment>
+
+
+</navigation>
