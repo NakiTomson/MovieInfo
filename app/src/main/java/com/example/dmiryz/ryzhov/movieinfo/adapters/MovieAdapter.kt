@@ -6,12 +6,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieEntity
 import com.example.dmiryz.ryzhov.movieinfo.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main._item_movie.view.*
 
-class MovieAdapter :  RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
+    constructor(movies: List<MovieEntity>) : this() {
+        this.movies.addAll(movies)
+    }
 
     lateinit var onEnd: onEndListener
     lateinit var movieSelectedListener: MovieSelectedListener
@@ -20,7 +24,7 @@ class MovieAdapter :  RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private var movies: MutableList<MovieEntity> = ArrayList()
 
     interface MovieSelectedListener {
-        fun onMovieSelected(movie: MovieEntity, imageView: ImageView)
+        fun onMovieSelected(movie: MovieEntity, imageView: ImageView,title:TextView)
     }
 
     interface onEndListener {
@@ -39,7 +43,8 @@ class MovieAdapter :  RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout._item_movie, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout._item_movie, parent, false)
         return MovieViewHolder(view)
     }
 
@@ -62,17 +67,18 @@ class MovieAdapter :  RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
         fun bindMovie(movie: MovieEntity) {
             title.text = movie.title
+            title.transitionName = movie.title
             year.text = movie.year
             poster.apply {
                 transitionName = movie.posterPath
                 Picasso.get()
-                    .load( movie.posterPath)
+                    .load(movie.posterPath)
                     .placeholder(R.drawable.not_connect)
                     .noFade()
                     .into(this)
             }
             rootMovie.setOnClickListener {
-                movieSelectedListener.onMovieSelected(movie, poster)
+                movieSelectedListener.onMovieSelected(movie, poster,title)
             }
         }
 

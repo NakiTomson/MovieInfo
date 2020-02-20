@@ -5,17 +5,18 @@ import androidx.lifecycle.ViewModel
 import com.example.dmiryz.ryzhov.domain.converters.DetailMovieConverter
 import com.example.dmiryz.ryzhov.domain.converters.ReviewConverter
 import com.example.dmiryz.ryzhov.domain.converters.TraillerConverter
-import com.example.dmiryz.ryzhov.domain.repositories.implementation.MovieRepository
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieDetailEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieReviewEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieTraillerEntity
+import com.example.dmiryz.ryzhov.domain.repositories.movie_repository.implementation.MovieRepository
+import com.example.dmiryz.ryzhov.domain.models.MovieDetailEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieReviewEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieTraillerEntity
+import com.example.dmiryz.ryzhov.domain.repositories.detail_movie_repository.implementation.MovieDetailRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class DetailMovieViewModel : ViewModel(), CoroutineScope {
 
 
-    private lateinit var heroesRepositoryImpl:MovieRepository
+    private lateinit var heroesRepositoryImpl:MovieDetailRepository
     var movieDetail: MutableLiveData<MovieDetailEntity> = MutableLiveData()
     var movieRevies: MutableLiveData<List<MovieReviewEntity>> = MutableLiveData()
     var movieTrailler: MutableLiveData<MovieTraillerEntity> = MutableLiveData()
@@ -28,7 +29,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getDetailsMovie(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                heroesRepositoryImpl = MovieRepository(movieConverter = DetailMovieConverter())
+                heroesRepositoryImpl = MovieDetailRepository(movieConverter = DetailMovieConverter())
                 val movieDetails = heroesRepositoryImpl.getMovieDetail(id).await()
                 withContext(Dispatchers.Main){
                     movieDetail.value = movieDetails
@@ -43,7 +44,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getReviewMovie(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                heroesRepositoryImpl = MovieRepository(movieConverter = ReviewConverter())
+                heroesRepositoryImpl = MovieDetailRepository(movieConverter = ReviewConverter())
                 val reviews = heroesRepositoryImpl.getReviewMovie(id).await()
                 withContext(Dispatchers.Main){
                     movieRevies.value = reviews
@@ -58,7 +59,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getTrailer(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                heroesRepositoryImpl = MovieRepository(movieConverter = TraillerConverter())
+                heroesRepositoryImpl = MovieDetailRepository(movieConverter = TraillerConverter())
                 val trailler = heroesRepositoryImpl.getTraillerMovie(id).await()
                 withContext(Dispatchers.Main){
                     movieTrailler.value = trailler

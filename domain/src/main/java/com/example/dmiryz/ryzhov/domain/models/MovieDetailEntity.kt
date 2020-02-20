@@ -1,4 +1,4 @@
-package com.example.dmiryz.ryzhov.domain.repositories.models
+package com.example.dmiryz.ryzhov.domain.models
 
 data class MovieDetailEntity(
     val genreOne: String? = null,

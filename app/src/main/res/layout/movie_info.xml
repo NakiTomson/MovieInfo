@@ -35,28 +35,29 @@
             android:id="@+id/name_movie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
             android:fontFamily="@font/roboto_slab_bold"
+            android:paddingStart="5dp"
             android:text="@string/title_movie"
             android:textSize="19dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/poster_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/runtime_movie"
             android:layout_width="70dp"
+            android:layout_height="0dp"
             android:paddingStart="5dp"
-            android:textSize="16dp"
-            android:layout_height="wrap_content"
             android:text="@string/_2_2"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/name_movie"
             app:layout_constraintTop_toBottomOf="@+id/name_movie" />
 
         <TextView
             android:id="@+id/release_date"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:paddingStart="5dp"
             android:text="@string/_2019"
             android:maxLength="4"
@@ -116,10 +117,10 @@
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:drawableRight="@drawable/ic_star_add"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/_7_4"
-            android:layout_marginStart="4dp"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/name_movie"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
@@ -148,7 +149,7 @@
 
         <TextView
             android:id="@+id/vote_count"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/voit_count"

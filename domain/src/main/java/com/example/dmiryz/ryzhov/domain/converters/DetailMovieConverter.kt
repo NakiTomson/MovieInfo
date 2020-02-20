@@ -1,9 +1,8 @@
 package com.example.dmiryz.ryzhov.domain.converters
 
-import android.util.Log
 import com.example.dmiryz.ryzhov.data.remote.models.details.ResponseDetails
 import com.example.dmiryz.ryzhov.domain.converters.factory.Converter
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieDetailEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieDetailEntity
 
 class DetailMovieConverter() : Converter() {
 

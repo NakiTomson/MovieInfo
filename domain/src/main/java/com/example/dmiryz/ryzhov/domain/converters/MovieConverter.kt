@@ -6,7 +6,7 @@ import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.BASE_POSTER_URL
 import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.BIG_POSTER_SIZE
 import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.SMALL_POSTER_SIZE
 import com.example.dmiryz.ryzhov.domain.converters.factory.Converter
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieEntity
 
 class MovieConverter : Converter() {
 

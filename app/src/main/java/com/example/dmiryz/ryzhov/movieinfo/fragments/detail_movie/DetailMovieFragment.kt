@@ -14,13 +14,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieDetailEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieReviewEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieTraillerEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieDetailEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieReviewEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieTraillerEntity
 import com.example.dmiryz.ryzhov.movieinfo.R
 import com.example.dmiryz.ryzhov.movieinfo.adapters.ReviewAdapter
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.API_YOUTUBE_KEY
-import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarDetail
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarExpandedFunction
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -59,15 +59,25 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
     private fun initData() {
         viewModelDetail = ViewModelProviders.of(this).get(DetailMovieViewModel::class.java)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(true)
         activity?.findViewById<FloatingActionButton>(R.id.fab)?.visibility = View.VISIBLE
-        stateAppBarDetail = true
+        stateAppBarExpandedFunction = true
         reviewAdapter = ReviewAdapter()
         recyclerViewReviews.layoutManager = LinearLayoutManager(activity)
         recyclerViewReviews.setHasFixedSize(true)
         recyclerViewReviews.adapter = reviewAdapter
         frag = this.childFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragment?
+
+        name_movie.transitionName = args.titleMovie
+        name_movie.text = args.titleMovie
+        ratingBar.rating = args.voteAverage
+        rating.text = "${args.voteAverage} /"
+        vote_count.text = "${args.voteCount} votes"
+        description.text = args.overview
+        reasled_date.text = "Released: ${args.yearStart}"
+        release_date.text = args.yearStart
     }
 
     private fun setData() {
@@ -79,24 +89,24 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
             Picasso.get()
                 .load(moviePosterUri)
                 .noFade()
-                .into(poster_image,object : Callback {
-                    override fun onSuccess() {
-                        kotlin.run {
-                            viewModelDetail.getDetailsMovie(args.id)
-                            viewModelDetail.getReviewMovie(args.id)
-                            viewModelDetail.getTrailer(args.id)
-                        }
-                    }
-                    override fun onError(e: Exception?) {
-                        Toast.makeText(context,"Ошибка заугрузет",Toast.LENGTH_SHORT).show()
-                    }
-                })
+                .into(poster_image)
         }
 
         Picasso.get()
             .load(movieBackPosterUri)
             .placeholder(R.drawable.poster_real_size)
-            .into(activity?.findViewById<ImageView>(R.id.expandedImage))
+            .into(activity?.findViewById<ImageView>(R.id.expandedImage),object : Callback {
+                override fun onSuccess() {
+                    kotlin.run {
+                        viewModelDetail.getDetailsMovie(args.id)
+                        viewModelDetail.getReviewMovie(args.id)
+                    }
+                }
+
+                override fun onError(e: Exception?) {
+                    Toast.makeText(context, "Ошибка заугрузет", Toast.LENGTH_SHORT).show()
+                }
+            })
 
         viewModelDetail.movieDetail.observe(activity!!, Observer<MovieDetailEntity> {
             val hourse: Int = it.runtime / 60
@@ -104,16 +114,6 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
             val time = "$hourse ч, $minute м"
             runtime_movie.text = time
             budget.text = "${it.budget} $"
-
-
-            name_movie.text = args.titleMovie
-            ratingBar.rating = args.voteAverage
-            rating.text = "${args.voteAverage} /"
-            vote_count.text = "${args.voteCount} votes"
-            description.text = args.overview
-            reasled_date.text = "Released: ${args.yearStart}"
-            release_date.text = args.yearStart
-
 
             it.genreOne?.let {
                 gender.text = it
@@ -131,6 +131,7 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
                 gender4.text = it
                 gender4.visibility = View.VISIBLE
             }
+            viewModelDetail.getTrailer(args.id)
         })
 
         viewModelDetail.movieRevies.observe(activity!!, Observer<List<MovieReviewEntity>> {
@@ -155,11 +156,18 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         }
     }
 
-    override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, p1: YouTubePlayer?, p2: Boolean) {
+    override fun onInitializationSuccess(
+        p0: YouTubePlayer.Provider?,
+        p1: YouTubePlayer?,
+        p2: Boolean
+    ) {
         p1!!.cueVideo(video)
     }
 
-    override fun onInitializationFailure(p0: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {
+    override fun onInitializationFailure(
+        p0: YouTubePlayer.Provider?,
+        p1: YouTubeInitializationResult?
+    ) {
         if (p1!!.isUserRecoverableError) {
             Toast.makeText(context, "Error if", Toast.LENGTH_LONG).show()
         } else {

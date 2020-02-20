@@ -11,11 +11,9 @@
 
 
     <string-array name="tabs">
-        <item>Popular</item>
-        <item>Rated</item>
-        <item>Tv</item>
+        <item>Рекомендуем</item>
+        <item>По Жанрам</item>
     </string-array>
-
 
 
 
@@ -23,7 +21,7 @@
     <string name="_2019">2019</string>
     <string name="_2_2">2 h, 2 m</string>
     <string name="age_range">age_range</string>
-    <string name="_7_4">7.4/</string>
+    <string name="_7_4">7.4</string>
     <string name="_10">10</string>
     <string name="gander">militant</string>
     <string name="gander2">comedy</string>

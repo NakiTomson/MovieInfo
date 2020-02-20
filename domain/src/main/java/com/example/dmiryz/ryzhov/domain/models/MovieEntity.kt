@@ -1,4 +1,7 @@
-package com.example.dmiryz.ryzhov.domain.repositories.models
+package com.example.dmiryz.ryzhov.domain.models
+
+import android.os.Parcelable
+import java.io.Serializable
 
 data class MovieEntity(
     val title: String,
@@ -9,5 +12,5 @@ data class MovieEntity(
     var id:Int,
     var voteAverage:Double,
     var overview:String
-) {
+) :Serializable{
 }

@@ -43,4 +43,16 @@ interface MovieServices {
         @Query("api_key") api_key: String,
         @Query("language") language: String
     ): Deferred<TrailerResponse>
+
+
+    @GET("/3/discover/{category}?")
+    fun getMoviesAll(
+        @Path("category") movie: String,
+        @Query("api_key") api_key: String,
+        @Query("language") language: String,
+        @Query("sort_by") sort_by: String,
+        @Query("page") page: Int,
+        @Query("vote_count.gte") vote_count: Int,
+        @Query("with_genres") with_gender: String
+    ): Deferred<MovieResponse>
 }

@@ -15,7 +15,7 @@ import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.VOTE_COUNT
 import kotlinx.coroutines.Deferred
 
 
-class MovieProviderImpl :ContractProvider {
+class MovieProviderImpl :MovieProvider {
 
     override fun getMovieListPopularity(page: Int): Deferred<MovieResponse> {
         return RetrofitFactory.getMovieService().getMovies(MOVIE_TYPE, API_KEY, LANGUAGE, SORT_BY_POPULARITY, page, VOTE_COUNT)
@@ -42,4 +42,8 @@ class MovieProviderImpl :ContractProvider {
         return RetrofitFactory.getMovieService().getReview(id, API_KEY, LANGUAGE, 1)
     }
 
+
+    override fun getMovie(page: Int,movieType:String,gender:String): Deferred<MovieResponse> {
+        return RetrofitFactory.getMovieService().getMoviesAll(movieType, API_KEY, LANGUAGE, SORT_BY_POPULARITY, page, VOTE_COUNT,gender)
+    }
 }

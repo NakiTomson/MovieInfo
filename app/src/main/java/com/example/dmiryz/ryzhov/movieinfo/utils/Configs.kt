@@ -17,6 +17,6 @@ class Configs {
         var stateThree:Boolean = true
         var myPosition:Int = 0
 
-        var stateAppBarDetail:Boolean = false
+        var stateAppBarExpandedFunction:Boolean = false
     }
 }

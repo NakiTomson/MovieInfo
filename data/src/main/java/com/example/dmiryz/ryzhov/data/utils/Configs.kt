@@ -15,5 +15,47 @@ class Configs {
         val BASE_POSTER_URL = "https://image.tmdb.org/t/p/"
         val SMALL_POSTER_SIZE = "w185"
         val BIG_POSTER_SIZE = "w780"
+
+
+        class GendersMovie{
+            val Action:String = "28"
+            val Adventure:String = "12"
+            val Animation:String = "16"
+            val Comedy:String = "35"
+            val Crime:String = "80"
+            val Documentary:String = "99"
+            val Drama:String = "18"
+            val Family:String = "10751"
+            val Fantasy:String = "14"
+            val History:String = "36"
+            val Horror:String = "27"
+            val Music:String = "10402"
+            val Mystery:String = "9648"
+            val Romance:String = "10749"
+            val ScienceFiction:String = "878"
+            val TVMovie:String = "10770"
+            val Thriller:String = "53"
+            val War:String = "10752"
+            val Western:String = "37"
+        }
+
+        class GendersTv{
+            val ActionAdventure:String = "10759"
+            val Animation:String = "16"
+            val Comedy:String = "35"
+            val Crime:String = "80"
+            val Documentary:String = "99"
+            val Drama:String = "18"
+            val Family:String = "10751"
+            val Kids:String = "10762"
+            val Mystery:String = "9648"
+            val News:String = "10763"
+            val Reality:String = "10764"
+            val SciFiFantasy:String = "10765"
+            val Soap:String = "10766"
+            val Talk:String = "10767"
+            val WarPolitics:String = "10768"
+            val Western:String = "37"
+        }
     }
 }

@@ -4,10 +4,10 @@ import com.example.dmiryz.ryzhov.data.remote.models.details.ResponseDetails
 import com.example.dmiryz.ryzhov.data.remote.models.movie.MovieResult
 import com.example.dmiryz.ryzhov.data.remote.models.review.ReviewResult
 import com.example.dmiryz.ryzhov.data.remote.models.trailer.TrailerResult
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieDetailEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieReviewEntity
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieTraillerEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieDetailEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieReviewEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieTraillerEntity
 
 open class Converter {
 

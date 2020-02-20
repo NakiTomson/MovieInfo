@@ -2,6 +2,7 @@ package com.example.dmiryz.ryzhov.movieinfo.fragments.movie
 
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.example.dmiryz.ryzhov.movieinfo.R
 import com.example.dmiryz.ryzhov.movieinfo.adapters.ViewPagerAdapter
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.myPosition
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarExpandedFunction
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateOne
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateThree
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateTwo
@@ -61,8 +63,7 @@ class MovieSectionFragment : Fragment() {
 
     private fun setData() {
         setHasOptionsMenu(true)
-        Configs.stateAppBarDetail = false
-
+        stateAppBarExpandedFunction = false
         viewPager2.adapter = createCardAdapter()
         viewPager2.clipToPadding = false
         viewPager2.clipChildren = false

@@ -15,6 +15,14 @@
             android:id="@+id/action_nav_movie_to_detailMovieFragment"
             app:destination="@id/detailMovieFragment"
             app:popUpTo="@+id/nav_movie" />
+        <action
+            android:id="@+id/action_nav_movie_to_fullMovieListFragment"
+            app:destination="@id/fullMovieListFragment"
+            app:enterAnim="@animator/in_enter_anim"
+            app:exitAnim="@animator/in_exit_anim"
+
+            app:popEnterAnim="@animator/out_enter_anim"
+            app:popExitAnim="@animator/out_exit_anim" />
     </fragment>
 
     <fragment
@@ -75,6 +83,18 @@
             android:name="overview"
             app:argType="string"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/fullMovieListFragment"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.full_movie.FullMovieListFragment"
+        android:label="FullMovieListFragment" >
+        <argument
+            android:name="movie_list"
+            app:argType="com.example.dmiryz.ryzhov.domain.models.MovieCategoryEntity" />
+        <action
+            android:id="@+id/action_fullMovieListFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment"
+            app:popUpTo="@+id/fullMovieListFragment" />
     </fragment>
 
 

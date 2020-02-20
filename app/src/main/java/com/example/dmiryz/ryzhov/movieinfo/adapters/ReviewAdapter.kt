@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dmiryz.ryzhov.domain.repositories.models.MovieReviewEntity
+import com.example.dmiryz.ryzhov.domain.models.MovieReviewEntity
 import com.example.dmiryz.ryzhov.movieinfo.R
 
 

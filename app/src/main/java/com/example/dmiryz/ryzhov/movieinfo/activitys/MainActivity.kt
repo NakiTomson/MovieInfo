@@ -12,9 +12,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dmiryz.ryzhov.movieinfo.R
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.defaul_toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,8 +34,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+//        val toolbar: Toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -43,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
+        val defaultToolbar = layoutInflater.inflate(R.layout.defaul_toolbar, appBarLayout, false) as CollapsingToolbarLayout
+        val allMovieToolbar = layoutInflater.inflate(R.layout.all_movie_toolbar, appBarLayout, false) as CollapsingToolbarLayout
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_movie,
@@ -51,8 +57,23 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_exit
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.fullMovieListFragment -> {
+                    appBarLayout.removeAllViews()
+                    appBarLayout.addView(allMovieToolbar)
+                    setSupportActionBar(allMovieToolbar.findViewById(R.id.all_movies_toolbar))
+                }
+                else -> {
+                    appBarLayout.removeAllViews()
+                    appBarLayout.addView(defaultToolbar)
+                    setSupportActionBar(defaultToolbar.findViewById(R.id.toolbar_default))
+                }
+            }
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            navView.setupWithNavController(navController)
+        }
     }
 
 

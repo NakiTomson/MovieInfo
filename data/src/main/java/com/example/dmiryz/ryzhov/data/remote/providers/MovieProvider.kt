@@ -6,7 +6,7 @@ import com.example.dmiryz.ryzhov.data.remote.models.review.ReviewResponse
 import com.example.dmiryz.ryzhov.data.remote.models.trailer.TrailerResponse
 import kotlinx.coroutines.Deferred
 
-interface ContractProvider {
+interface MovieProvider {
 
     fun getMovieListPopularity(page: Int): Deferred<MovieResponse>
 
@@ -19,5 +19,7 @@ interface ContractProvider {
     fun getTrailerMovie(id: Int): Deferred<TrailerResponse>
 
     fun getReviewMovie(id: Int): Deferred<ReviewResponse>
+
+    fun getMovie(page: Int,movieType:String,gender:String): Deferred<MovieResponse>
 
 }

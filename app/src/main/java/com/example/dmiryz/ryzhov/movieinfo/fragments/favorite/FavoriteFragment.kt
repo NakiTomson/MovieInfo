@@ -1,6 +1,7 @@
 package com.example.dmiryz.ryzhov.movieinfo.fragments.favorite
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
