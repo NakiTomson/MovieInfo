@@ -43,7 +43,7 @@ class MovieProviderImpl :MovieProvider {
     }
 
 
-    override fun getMovie(page: Int,movieType:String,gender:String): Deferred<MovieResponse> {
-        return RetrofitFactory.getMovieService().getMoviesAll(movieType, API_KEY, LANGUAGE, SORT_BY_POPULARITY, page, VOTE_COUNT,gender)
+    override fun getMovie(page: Int,movieType:String,gender:String,sortMovieType:String): Deferred<MovieResponse> {
+        return RetrofitFactory.getMovieService().getMoviesAll(movieType, API_KEY, LANGUAGE, sortMovieType, page, VOTE_COUNT,gender)
     }
 }

@@ -23,8 +23,8 @@ class Configs {
             val Animation:String = "16"
             val Comedy:String = "35"
             val Crime:String = "80"
-            val Documentary:String = "99"
             val Drama:String = "18"
+            val Documentary:String = "99"
             val Family:String = "10751"
             val Fantasy:String = "14"
             val History:String = "36"
@@ -57,5 +57,11 @@ class Configs {
             val WarPolitics:String = "10768"
             val Western:String = "37"
         }
+
+//        enum class MovieCategory(val title:String) {
+//            `28`(title = "Action"), `12`(title = "Adventure"),
+//            `16`(title = "Animation"), `35`(title = "Comedy"),
+//            `80`(title = "Crime"), `18`(title = "Drama"),
+//        }
     }
 }

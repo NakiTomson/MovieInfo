@@ -1,5 +1,6 @@
 package com.example.dmiryz.ryzhov.movieinfo.fragments.movie.card
 
+import android.app.Application
 import android.icu.text.CaseMap
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,9 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dmiryz.ryzhov.domain.models.MovieCategoryEntity
 import com.example.dmiryz.ryzhov.domain.models.MovieEntity
@@ -35,21 +38,21 @@ class CardFragment : Fragment() {
 
     private lateinit var movieViewModel: CardViewModel
     lateinit var myCategoryAdapter: CategoryMovieAdapter
-    lateinit var myMovieAdapter: MovieAdapter
+    lateinit var genders:List<String>
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.card_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         movieViewModel = ViewModelProviders.of(this).get(CardViewModel::class.java)
-        myMovieAdapter = MovieAdapter()
-        myCategoryAdapter = CategoryMovieAdapter()
+        genders = resources.getStringArray(R.array.genders).toList()
 
         recyclerViewMovie.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = myCategoryAdapter
         }
 
         downloadData()
@@ -79,6 +82,8 @@ class CardFragment : Fragment() {
     private fun downloadData() {
         when (countern) {
             0 -> {
+                myCategoryAdapter = CategoryMovieAdapter(0)
+                recyclerViewMovie.adapter = myCategoryAdapter
                 movieViewModel.getMoviePopular()
                 movieViewModel.getMovieRated()
                 movieViewModel.getMovieTv()
@@ -96,16 +101,23 @@ class CardFragment : Fragment() {
                 })
             }
             1 -> {
-                movieViewModel.getMovieRated()
-                movieViewModel.movieRated.observe(activity!!, Observer<List<MovieEntity>> {
-
+                myCategoryAdapter = CategoryMovieAdapter(1)
+                recyclerViewMovie.layoutManager = GridLayoutManager(context,2)
+                recyclerViewMovie.adapter = myCategoryAdapter
+                movieViewModel.getAllCategoryMovie()
+                movieViewModel.allCategoryMovie.observe(activity!!, Observer<List<MovieCategoryEntity>> {
+                    val categoryMovie:MutableList<MovieCategoryEntity>  = ArrayList()
+                    for ((index, value) in it.withIndex()) {
+                        categoryMovie.add(MovieCategoryEntity(categoryMovie = genders[index],movies = value.movies))
+                    }
+                    categoryMovie.forEach { movieCategory -> myCategoryAdapter.addMoviesCategory(movieCategory) }
                 })
             }
             2 -> {
-                movieViewModel.getMovieTv()
-                movieViewModel.seriesTv.observe(activity!!, Observer<List<MovieEntity>> {
-
-                })
+//                movieViewModel.getAllCategoryMovieTV()
+//                movieViewModel.seriesTv.observe(activity!!, Observer<List<MovieEntity>> {
+//
+//                })
             }
             else -> throw Exception("Need Take 3")
         }

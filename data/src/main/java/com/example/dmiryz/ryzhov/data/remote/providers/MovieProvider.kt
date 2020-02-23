@@ -20,6 +20,6 @@ interface MovieProvider {
 
     fun getReviewMovie(id: Int): Deferred<ReviewResponse>
 
-    fun getMovie(page: Int,movieType:String,gender:String): Deferred<MovieResponse>
+    fun getMovie(page: Int,movieType:String,gender:String,sortMovieType:String): Deferred<MovieResponse>
 
 }

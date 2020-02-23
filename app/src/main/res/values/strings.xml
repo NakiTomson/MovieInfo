@@ -12,10 +12,24 @@
 
     <string-array name="tabs">
         <item>Рекомендуем</item>
-        <item>По Жанрам</item>
+        <item>Фильмы</item>
+        <item>Сериалы</item>
     </string-array>
 
 
+    <string-array name="tabs2">
+        <item>Популярное</item>
+        <item>Рейтенговое</item>
+    </string-array>
+
+    <string-array name="genders">
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Animation</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Drama</item>
+    </string-array>
 
     <string name="title_movie">Jumanji: a New level</string>
     <string name="_2019">2019</string>

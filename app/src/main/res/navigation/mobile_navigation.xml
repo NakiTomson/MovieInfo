@@ -17,7 +17,7 @@
             app:popUpTo="@+id/nav_movie" />
         <action
             android:id="@+id/action_nav_movie_to_fullMovieListFragment"
-            app:destination="@id/fullMovieListFragment"
+            app:destination="@id/SectionfullMovieListFragment"
             app:enterAnim="@animator/in_enter_anim"
             app:exitAnim="@animator/in_exit_anim"
 
@@ -85,16 +85,17 @@
             />
     </fragment>
     <fragment
-        android:id="@+id/fullMovieListFragment"
-        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.full_movie.FullMovieListFragment"
-        android:label="FullMovieListFragment" >
+        android:id="@+id/SectionfullMovieListFragment"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.full_movie.SectionFullMovieListFragment"
+        android:label="FullMovieListFragment"
+        tools:layout="@layout/full_movie_list_fragment">
         <argument
             android:name="movie_list"
             app:argType="com.example.dmiryz.ryzhov.domain.models.MovieCategoryEntity" />
         <action
             android:id="@+id/action_fullMovieListFragment_to_detailMovieFragment"
             app:destination="@id/detailMovieFragment"
-            app:popUpTo="@+id/fullMovieListFragment" />
+            app:popUpTo="@+id/SectionfullMovieListFragment" />
     </fragment>
 
 

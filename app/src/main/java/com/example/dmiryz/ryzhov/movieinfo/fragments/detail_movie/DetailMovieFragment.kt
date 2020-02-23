@@ -59,8 +59,6 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
     private fun initData() {
         viewModelDetail = ViewModelProviders.of(this).get(DetailMovieViewModel::class.java)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(true)
         activity?.findViewById<FloatingActionButton>(R.id.fab)?.visibility = View.VISIBLE
         stateAppBarExpandedFunction = true

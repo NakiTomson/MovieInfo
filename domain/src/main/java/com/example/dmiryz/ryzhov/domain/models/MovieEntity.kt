@@ -11,6 +11,7 @@ data class MovieEntity(
     var voteCount:Int,
     var id:Int,
     var voteAverage:Double,
-    var overview:String
+    var overview:String,
+    var typeMovie:String
 ) :Serializable{
 }

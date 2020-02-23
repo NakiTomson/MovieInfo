@@ -60,11 +60,11 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.fullMovieListFragment -> {
-                    appBarLayout.removeAllViews()
-                    appBarLayout.addView(allMovieToolbar)
-                    setSupportActionBar(allMovieToolbar.findViewById(R.id.all_movies_toolbar))
-                }
+//                R.id.SectionfullMovieListFragment -> {
+//                    appBarLayout.removeAllViews()
+//                    appBarLayout.addView(defaultToolbar)
+//                    setSupportActionBar(allMovieToolbar.findViewById(R.id.all_movies_toolbar))
+//                }
                 else -> {
                     appBarLayout.removeAllViews()
                     appBarLayout.addView(defaultToolbar)

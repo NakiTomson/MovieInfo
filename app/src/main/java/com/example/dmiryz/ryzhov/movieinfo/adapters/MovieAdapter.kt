@@ -17,11 +17,12 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         this.movies.addAll(movies)
     }
 
-    lateinit var onEnd: onEndListener
-    lateinit var movieSelectedListener: MovieSelectedListener
-
-
     private var movies: MutableList<MovieEntity> = ArrayList()
+
+
+    lateinit var onEnd: onEndListener
+    var onMovieDounload: Boolean = true
+    lateinit var movieSelectedListener: MovieSelectedListener
 
     interface MovieSelectedListener {
         fun onMovieSelected(movie: MovieEntity, imageView: ImageView,title:TextView)
@@ -31,13 +32,9 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         fun onReachEnd()
     }
 
-    fun setEndListener(onEndListener: onEndListener) {
-        onEnd = onEndListener
-    }
-
-
     fun addMovies(movies: List<MovieEntity>) {
         this.movies.addAll(movies)
+        onMovieDounload = true
         notifyDataSetChanged()
     }
 
@@ -53,10 +50,11 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        if (movies.size >= 20 && position > movies.size - 4) {
-//            onEnd.onReachEnd()
-        }
         holder.bindMovie(movie = movies[position])
+        if (movies.size >= 20 && position > movies.size - 2 && onMovieDounload) {
+            onEnd.onReachEnd()
+            onMovieDounload = false
+        }
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -65,12 +63,12 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         val year: TextView = itemView.findViewById(R.id.year)
         val rootMovie = itemView.root_movie
 
+
         fun bindMovie(movie: MovieEntity) {
             title.text = movie.title
             title.transitionName = movie.title
             year.text = movie.year
             poster.apply {
-                transitionName = movie.posterPath
                 Picasso.get()
                     .load(movie.posterPath)
                     .placeholder(R.drawable.not_connect)
@@ -78,6 +76,7 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     .into(this)
             }
             rootMovie.setOnClickListener {
+                poster.transitionName = movie.posterPath
                 movieSelectedListener.onMovieSelected(movie, poster,title)
             }
         }

@@ -12,11 +12,15 @@ class Configs {
         val BIG_POSTER_SIZE = "w780"
 
         var countern: Int = 0
+        var Fullcountern: Int = 0
         var stateOne:Boolean = true
         var stateTwo:Boolean = true
         var stateThree:Boolean = true
         var myPosition:Int = 0
 
         var stateAppBarExpandedFunction:Boolean = false
+
+        var PAGE_ONE = 1
+        var PAGE_TWO = 1
     }
 }

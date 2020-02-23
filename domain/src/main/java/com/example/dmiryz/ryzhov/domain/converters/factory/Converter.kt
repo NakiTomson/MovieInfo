@@ -12,11 +12,11 @@ import com.example.dmiryz.ryzhov.domain.models.MovieTraillerEntity
 open class Converter {
 
     open fun fromDateMovieToUI(model: MovieResult): MovieEntity {
-        return MovieEntity("bag","bag","10","10",0,0,0.0,"bag")
+        return MovieEntity("bag","bag","10","10",0,0,0.0,"bag","movie")
     }
 
     open fun fromDateTvToUI(model: MovieResult): MovieEntity {
-        return MovieEntity("bag","bag","bag","bag",0,0,0.0,"bag")
+        return MovieEntity("bag","bag","bag","bag",0,0,0.0,"bag","tv")
     }
 
     open fun fromDetailDateMovieToUI(detail: ResponseDetails): MovieDetailEntity {
