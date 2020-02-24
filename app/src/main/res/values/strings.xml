@@ -29,6 +29,11 @@
         <item>Comedy</item>
         <item>Crime</item>
         <item>Drama</item>
+        <item>Family</item>
+        <item>Fantasy</item>
+        <item>Horror</item>
+        <item>Romance</item>
+        <item>Romance</item>
     </string-array>
 
     <string name="title_movie">Jumanji: a New level</string>

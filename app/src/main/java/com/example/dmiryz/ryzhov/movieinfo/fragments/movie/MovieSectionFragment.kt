@@ -18,7 +18,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.dmiryz.ryzhov.movieinfo.R
 import com.example.dmiryz.ryzhov.movieinfo.adapters.ViewPagerAdapter
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs
-import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.myPosition
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.myPositionOnViewPagersFragments
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarExpandedFunction
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateOne
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateThree
@@ -50,7 +50,7 @@ class MovieSectionFragment : Fragment() {
 
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                myPosition = position
+                myPositionOnViewPagersFragments = position
                 when (position) {
                     0 -> activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(stateOne)
                     1 -> activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(stateTwo)

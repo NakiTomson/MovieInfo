@@ -21,8 +21,6 @@ class CardViewModel(app:Application) : AndroidViewModel(app), CoroutineScope {
     private val job: Job = Job()
 
 
-
-
     private val moviesRepositoryImpl = MovieRepository(movieConverter = MovieConverter())
 
     var moviePopular: MutableLiveData<List<MovieEntity>> = MutableLiveData()

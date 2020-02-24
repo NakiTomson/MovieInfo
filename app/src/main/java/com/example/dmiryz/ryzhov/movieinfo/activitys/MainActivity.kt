@@ -2,6 +2,7 @@ package com.example.dmiryz.ryzhov.movieinfo.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -12,6 +13,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dmiryz.ryzhov.movieinfo.R
+import com.example.dmiryz.ryzhov.movieinfo.utils.AppBarStateChangeListener
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarExpandedFunction
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateFive
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateFoure
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -29,13 +36,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         decorView = window.decorView
         decorView.setOnSystemUiVisibilityChangeListener {
-            if (it == 0){
+            if (it == 0) {
                 decorView.systemUiVisibility = hideSystemBar()
             }
         }
 
-//        val toolbar: Toolbar = findViewById(R.id.toolbar)
-//        setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -46,8 +51,16 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        val defaultToolbar = layoutInflater.inflate(R.layout.defaul_toolbar, appBarLayout, false) as CollapsingToolbarLayout
-        val allMovieToolbar = layoutInflater.inflate(R.layout.all_movie_toolbar, appBarLayout, false) as CollapsingToolbarLayout
+        val defaultToolbar = layoutInflater.inflate(
+            R.layout.defaul_toolbar,
+            appBarLayout,
+            false
+        ) as CollapsingToolbarLayout
+        val allMovieToolbar = layoutInflater.inflate(
+            R.layout.all_movie_toolbar,
+            appBarLayout,
+            false
+        ) as CollapsingToolbarLayout
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -73,9 +86,39 @@ class MainActivity : AppCompatActivity() {
             }
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
+            changeConfigurationAppBar()
         }
     }
 
+    private fun changeConfigurationAppBar() {
+        findViewById<AppBarLayout>(R.id.appBarLayout)?.addOnOffsetChangedListener(object :
+            AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
+                if (stateAppBarExpandedFunction) return
+                when (Configs.myPositionOnViewPagersFragments) {
+                    0 -> Configs.stateOne = getCurrentStateAppBar(sate = state.name)
+                    1 -> Configs.stateTwo = getCurrentStateAppBar(sate = state.name)
+                    2 -> Configs.stateThree = getCurrentStateAppBar(sate = state.name)
+                    3 -> {
+                        Configs.stateFoure = getCurrentStateAppBar(sate = state.name)
+                        Log.i("TAGStateFoureAppBar", stateFoure.toString())
+                    }
+                    4 -> {
+                        Configs.stateFive = getCurrentStateAppBar(sate = state.name)
+                        Log.i("TAGStateFiveAppBar", stateFive.toString())
+                    }
+                    else -> throw Exception("it dosent work")
+                }
+            }
+        })
+    }
+
+    fun getCurrentStateAppBar(sate: String): Boolean {
+        return when (sate) {
+            "COLLAPSED" -> false
+            else -> true
+        }
+    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
@@ -96,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun hideSystemBar():Int{
+    fun hideSystemBar(): Int {
         return (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN

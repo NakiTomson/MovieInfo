@@ -8,7 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavOptions
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmiryz.ryzhov.domain.models.MovieCategoryEntity
@@ -43,8 +45,8 @@ class CategoryMovieAdapter(var type: Int) :
 
 
     inner class CategoryMovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(gameCategory: MovieCategoryEntity, position: Int) {
 
+        fun bind(gameCategory: MovieCategoryEntity, position: Int) {
             val movieCategory: TextView = itemView.movieCategory
             val nextFullListMovies: ImageButton = itemView.imageNextAllFilms
             val recycler: RecyclerView = itemView.recyclerViewCategory
@@ -96,6 +98,9 @@ class CategoryMovieAdapter(var type: Int) :
 
             roootInFullListMovie.setOnClickListener {
                 val builder = NavOptions.Builder()
+//                val extras = FragmentNavigatorExtras(
+//                    movieOne to gameCategory.movies[0].title
+//                )
                 val navOptions = builder.setEnterAnim(R.anim.nav_default_enter_anim).setExitAnim(R.anim.nav_default_exit_anim).build()
                 val action = MovieSectionFragmentDirections.actionNavMovieToFullMovieListFragment(
                     movieList = categroyMovieList[position]

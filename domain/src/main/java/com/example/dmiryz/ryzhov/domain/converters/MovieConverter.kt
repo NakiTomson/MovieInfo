@@ -50,6 +50,7 @@ class MovieConverter : Converter() {
 
         return MovieCategoryEntity(
             categoryMovie = MovieCategory.valueOf(model.results?.get(0)?.genreIds?.get(0).toString()).title,
+            gender = model.results?.get(0)?.genreIds?.get(0).toString(),
             movies = model.results!!.map { movieResult ->fromDateMovieToUI(model = movieResult) }
         )
     }

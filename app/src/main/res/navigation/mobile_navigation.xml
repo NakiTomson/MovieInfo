@@ -23,6 +23,9 @@
 
             app:popEnterAnim="@animator/out_enter_anim"
             app:popExitAnim="@animator/out_exit_anim" />
+        <action
+            android:id="@+id/action_nav_movie_to_detailMovieFragment2"
+            app:destination="@id/detailMovieFragment" />
     </fragment>
 
     <fragment

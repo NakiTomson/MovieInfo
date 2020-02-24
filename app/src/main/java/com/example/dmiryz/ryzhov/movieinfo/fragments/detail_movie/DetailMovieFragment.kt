@@ -19,6 +19,7 @@ import com.example.dmiryz.ryzhov.domain.models.MovieReviewEntity
 import com.example.dmiryz.ryzhov.domain.models.MovieTraillerEntity
 import com.example.dmiryz.ryzhov.movieinfo.R
 import com.example.dmiryz.ryzhov.movieinfo.adapters.ReviewAdapter
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.API_YOUTUBE_KEY
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarExpandedFunction
 import com.google.android.material.appbar.AppBarLayout
@@ -35,15 +36,13 @@ import kotlinx.android.synthetic.main.movie_info.*
 
 class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
-    companion object {
-        fun newInstance() = DetailMovieFragment()
-    }
 
     private lateinit var viewModelDetail: DetailMovieViewModel
-    val args: DetailMovieFragmentArgs by navArgs()
     lateinit var reviewAdapter: ReviewAdapter
     var frag: YouTubePlayerSupportFragment? = null
     lateinit var video: String
+
+    val args: DetailMovieFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -55,13 +54,18 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         super.onActivityCreated(savedInstanceState)
         initData()
         setData()
+        viewModelDetail.getDetailsMovie(args.id)
+        viewModelDetail.getReviewMovie(args.id)
     }
 
     private fun initData() {
         viewModelDetail = ViewModelProviders.of(this).get(DetailMovieViewModel::class.java)
         activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(true)
         activity?.findViewById<FloatingActionButton>(R.id.fab)?.visibility = View.VISIBLE
+
         stateAppBarExpandedFunction = true
+
+
         reviewAdapter = ReviewAdapter()
         recyclerViewReviews.layoutManager = LinearLayoutManager(activity)
         recyclerViewReviews.setHasFixedSize(true)
@@ -87,24 +91,14 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
             Picasso.get()
                 .load(moviePosterUri)
                 .noFade()
-                .into(poster_image)
+                .into(this)
         }
 
         Picasso.get()
             .load(movieBackPosterUri)
             .placeholder(R.drawable.poster_real_size)
-            .into(activity?.findViewById<ImageView>(R.id.expandedImage),object : Callback {
-                override fun onSuccess() {
-                    kotlin.run {
-                        viewModelDetail.getDetailsMovie(args.id)
-                        viewModelDetail.getReviewMovie(args.id)
-                    }
-                }
+            .into(activity?.findViewById<ImageView>(R.id.expandedImage))
 
-                override fun onError(e: Exception?) {
-                    Toast.makeText(context, "Ошибка заугрузет", Toast.LENGTH_SHORT).show()
-                }
-            })
 
         viewModelDetail.movieDetail.observe(activity!!, Observer<MovieDetailEntity> {
             val hourse: Int = it.runtime / 60
@@ -144,32 +138,24 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = root_detail_movie.findNavController()
-        return when (item.itemId) {
-            android.R.id.home -> {
-                navController.popBackStack()
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onInitializationSuccess(
-        p0: YouTubePlayer.Provider?,
-        p1: YouTubePlayer?,
-        p2: Boolean
-    ) {
+    override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, p1: YouTubePlayer?, p2: Boolean) {
         p1!!.cueVideo(video)
     }
 
-    override fun onInitializationFailure(
-        p0: YouTubePlayer.Provider?,
-        p1: YouTubeInitializationResult?
-    ) {
+    override fun onInitializationFailure(p0: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {
         if (p1!!.isUserRecoverableError) {
-            Toast.makeText(context, "Error if", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Error if $", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(context, "Error else", Toast.LENGTH_LONG).show()
         }
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(false)
+        }
+        return true
+    }
+
 }

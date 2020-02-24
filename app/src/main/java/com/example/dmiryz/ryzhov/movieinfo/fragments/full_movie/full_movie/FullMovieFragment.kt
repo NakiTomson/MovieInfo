@@ -19,23 +19,24 @@ import com.example.dmiryz.ryzhov.movieinfo.R
 import com.example.dmiryz.ryzhov.movieinfo.adapters.MovieAdapter
 import com.example.dmiryz.ryzhov.movieinfo.adapters.MovieAdapter.onEndListener
 import com.example.dmiryz.ryzhov.movieinfo.fragments.full_movie.SectionFullMovieListFragmentDirections
-import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.Fullcountern
+import com.example.dmiryz.ryzhov.movieinfo.utils.AppBarStateChangeListener
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.FullFragmentPosition
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.PAGE_ONE
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.PAGE_TWO
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.SORT_BY_POPULARITY
+import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.SORT_BY_RATED
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateAppBarExpandedFunction
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.full_movie_fragment.*
 
 
 class FullMovieFragment() : Fragment() {
 
-    private lateinit var adapterMovie: MovieAdapter
     private lateinit var viewModelFullMovie: FullMovieViewModel
     private lateinit var movieInfo: MovieCategoryEntity
+    private lateinit var adapterMovie: MovieAdapter
     private lateinit var typeMovie: String
-    private lateinit var gender: String
 
-    var SORT_BY_POPULARITY = "popularity.desc"
-    var SORT_BY_RATED = "vote_average.desc"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.full_movie_fragment, container, false)
@@ -51,7 +52,6 @@ class FullMovieFragment() : Fragment() {
 
     private fun initData() {
         recyclerViewFullMovies.layoutManager = GridLayoutManager(context, 3)
-        stateAppBarExpandedFunction = true
         adapterMovie = MovieAdapter()
         recyclerViewFullMovies.adapter = adapterMovie
         movieInfo = arguments!!.getSerializable("ListMovieCategory") as MovieCategoryEntity
@@ -60,7 +60,7 @@ class FullMovieFragment() : Fragment() {
 
 
     private fun dowloadData() {
-        when (Fullcountern) {
+        when (FullFragmentPosition) {
             0 -> {
                 adapterMovie.addMovies(movieInfo.movies)
                 viewModelFullMovie.moviePopular.observe(activity!!, Observer<List<MovieEntity>> {
@@ -70,13 +70,12 @@ class FullMovieFragment() : Fragment() {
                 adapterMovie.onEnd = object : onEndListener {
                     override fun onReachEnd() {
                         PAGE_ONE++
-                        Log.i("TAGPAGE", PAGE_ONE.toString())
-                        viewModelFullMovie.getMoviePopular(PAGE_ONE,typeMovie,"",SORT_BY_POPULARITY)
+                        viewModelFullMovie.getMoviePopular(PAGE_ONE,typeMovie,movieInfo.gender,SORT_BY_POPULARITY)
                     }
                 }
             }
             1 -> {
-                viewModelFullMovie.getMovieRated(PAGE_TWO,typeMovie,"",SORT_BY_RATED)
+                viewModelFullMovie.getMovieRated(PAGE_TWO,typeMovie,movieInfo.gender,SORT_BY_RATED)
                 viewModelFullMovie.movieRated.observe(activity!!, Observer<List<MovieEntity>> {
                     adapterMovie.addMovies(it)
                 })
@@ -84,13 +83,15 @@ class FullMovieFragment() : Fragment() {
                 adapterMovie.onEnd = object : onEndListener {
                     override fun onReachEnd() {
                         PAGE_TWO++
-                        viewModelFullMovie.getMovieRated(PAGE_TWO,typeMovie,"",SORT_BY_RATED)
+                        viewModelFullMovie.getMovieRated(PAGE_TWO,typeMovie,movieInfo.gender,SORT_BY_RATED)
                     }
                 }
             }
             else -> throw Exception("Need Take 3")
         }
     }
+
+
 
     private fun selectMovie() {
         adapterMovie.movieSelectedListener = object : MovieAdapter.MovieSelectedListener {
@@ -118,7 +119,7 @@ class FullMovieFragment() : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(counter: Int?): FullMovieFragment {
-            Fullcountern = counter!!
+            FullFragmentPosition = counter!!
             return FullMovieFragment()
         }
     }
