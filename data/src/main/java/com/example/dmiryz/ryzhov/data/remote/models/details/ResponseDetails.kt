@@ -1,6 +1,5 @@
 package com.example.dmiryz.ryzhov.data.remote.models.details
 
-import com.example.dmiryz.ryzhov.data.remote.models.details.GenreResult
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -72,5 +71,12 @@ class ResponseDetails {
     @SerializedName("vote_count")
     @Expose
     var voteCount = 0
+
+    @SerializedName("production_companies")
+    @Expose
+    var productionCompanies: List<ProductionCompany>? = null
+    @SerializedName("production_countries")
+    @Expose
+    var productionCountries: List<ProductionCountry>? = null
 
 }

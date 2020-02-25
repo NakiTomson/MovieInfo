@@ -29,7 +29,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getDetailsMovie(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                heroesRepositoryImpl = MovieDetailRepository(movieConverter = DetailMovieConverter())
+                heroesRepositoryImpl = MovieDetailRepository(movieConverter = TraillerConverter())
                 val movieDetails = heroesRepositoryImpl.getMovieDetail(id).await()
                 withContext(Dispatchers.Main){
                     movieDetail.value = movieDetails
@@ -44,7 +44,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getReviewMovie(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                heroesRepositoryImpl = MovieDetailRepository(movieConverter = ReviewConverter())
+                heroesRepositoryImpl = MovieDetailRepository(movieConverter = TraillerConverter())
                 val reviews = heroesRepositoryImpl.getReviewMovie(id).await()
                 withContext(Dispatchers.Main){
                     movieRevies.value = reviews

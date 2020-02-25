@@ -1,7 +1,7 @@
 package com.example.dmiryz.ryzhov.domain.repositories.detail_movie_repository.implementation
 
 import com.example.dmiryz.ryzhov.data.remote.providers.MovieProviderImpl
-import com.example.dmiryz.ryzhov.domain.converters.factory.Converter
+import com.example.dmiryz.ryzhov.domain.converters.TraillerConverter
 import com.example.dmiryz.ryzhov.domain.models.MovieDetailEntity
 import com.example.dmiryz.ryzhov.domain.models.MovieReviewEntity
 import com.example.dmiryz.ryzhov.domain.models.MovieTraillerEntity
@@ -12,7 +12,7 @@ import kotlinx.coroutines.async
 import java.lang.Exception
 
 
-class MovieDetailRepository(val movieConverter: Converter): DetailMovieRepository {
+class MovieDetailRepository(val movieConverter: TraillerConverter): DetailMovieRepository {
 
     val movieProvider: MovieProviderImpl = MovieProviderImpl()
 

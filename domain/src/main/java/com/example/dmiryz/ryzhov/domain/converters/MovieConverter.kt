@@ -11,14 +11,13 @@ import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.MOVIE_TYPE
 import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.SMALL_POSTER_SIZE
 import com.example.dmiryz.ryzhov.data.utils.Configs.Companion.TV_TYPE
 import com.example.dmiryz.ryzhov.domain.R
-import com.example.dmiryz.ryzhov.domain.converters.factory.Converter
 import com.example.dmiryz.ryzhov.domain.enums.MovieCategory
 import com.example.dmiryz.ryzhov.domain.models.MovieCategoryEntity
 import com.example.dmiryz.ryzhov.domain.models.MovieEntity
 
-class MovieConverter : Converter() {
+open class MovieConverter {
 
-    override fun fromDateMovieToUI(model: MovieResult): MovieEntity {
+     fun fromDateMovieToUI(model: MovieResult): MovieEntity {
         return MovieEntity(
             title = model.title!!,
             year = model.releaseDate!!,
@@ -32,7 +31,7 @@ class MovieConverter : Converter() {
         )
     }
 
-    override fun fromDateTvToUI(model: MovieResult): MovieEntity {
+     fun fromDateTvToUI(model: MovieResult): MovieEntity {
         return MovieEntity(
             title = model.name!!,
             year = model.firstAirDate!!,
@@ -47,7 +46,6 @@ class MovieConverter : Converter() {
     }
 
     fun fromDateCategoryResponsToUICategeoryEntety(model: MovieResponse): MovieCategoryEntity {
-
         return MovieCategoryEntity(
             categoryMovie = MovieCategory.valueOf(model.results?.get(0)?.genreIds?.get(0).toString()).title,
             gender = model.results?.get(0)?.genreIds?.get(0).toString(),

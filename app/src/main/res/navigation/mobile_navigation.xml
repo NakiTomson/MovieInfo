@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_movie"
         android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.movie.MovieSectionFragment"
-        android:label="MovieFragment"
+        android:label="Movie"
         tools:layout="@layout/fragment_movie"
         >
         <action
@@ -18,11 +18,14 @@
         <action
             android:id="@+id/action_nav_movie_to_fullMovieListFragment"
             app:destination="@id/SectionfullMovieListFragment"
-            app:enterAnim="@animator/in_enter_anim"
-            app:exitAnim="@animator/in_exit_anim"
 
-            app:popEnterAnim="@animator/out_enter_anim"
-            app:popExitAnim="@animator/out_exit_anim" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+
+            />
         <action
             android:id="@+id/action_nav_movie_to_detailMovieFragment2"
             app:destination="@id/detailMovieFragment" />
@@ -49,7 +52,7 @@
     <fragment
         android:id="@+id/detailMovieFragment"
         android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.detail_movie.DetailMovieFragment"
-        android:label="DetailMovieFragment">
+        android:label="Detail movie">
 
         <argument
             android:name="title_movie"
@@ -90,7 +93,7 @@
     <fragment
         android:id="@+id/SectionfullMovieListFragment"
         android:name="com.example.dmiryz.ryzhov.movieinfo.fragments.full_movie.SectionFullMovieListFragment"
-        android:label="FullMovieListFragment"
+        android:label="Full List movie"
         tools:layout="@layout/full_movie_list_fragment">
         <argument
             android:name="movie_list"

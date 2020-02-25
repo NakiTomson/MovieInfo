@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/description_card"
@@ -13,7 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:id="@+id/image_indicator"
@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
             android:padding="5dp"
+            android:layout_marginStart="10dp"
             android:text="@string/description_movie"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_indicator"
@@ -42,14 +43,14 @@
             android:id="@+id/reasled_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/release_date"
-            android:padding="5dp"
             android:drawableStart="@drawable/usa"
             android:drawablePadding="10dp"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            app:layout_constraintStart_toEndOf="@+id/image_indicator"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:padding="5dp"
+            android:text="@string/release_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -68,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:contentDescription="@string/indicator_dollar"
+            app:layout_constraintBottom_toBottomOf="@+id/revenueMoneyMovie"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reasled_date"
             app:srcCompat="@drawable/dollar" />
@@ -82,8 +84,9 @@
             app:layout_constraintStart_toStartOf="@+id/description"
             app:layout_constraintTop_toBottomOf="@+id/reasled_date" />
 
+
         <TextView
-            android:id="@+id/budget"
+            android:id="@+id/budgetMovie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/money_info"
@@ -92,6 +95,231 @@
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/reasled_date" />
 
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:padding="5dp"
+            android:text="@string/revenue"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/budgetMovie" />
+
+        <TextView
+            android:id="@+id/revenueMoneyMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/money_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/budgetMovie" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:srcCompat="@drawable/web_icon" />
+
+        <Button
+            android:id="@+id/buttonInstagramm"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:background="@color/colorInstagramBackground"
+            android:text="Instagram"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/buttonFacebook"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/colorFacebookBackground"
+            android:text="Facebook"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/buttonInstagramm"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/buttonTwitter"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/colorTwitterBackground"
+            android:text="Twitter"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/buttonFacebook"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/buttonIMDb"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="4dp"
+            android:background="@color/colorIMDbBackground"
+            android:text="IMDb"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/buttonTwitter"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.571" />
+
+        <Button
+            android:id="@+id/buttonHomepage"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="start|center"
+            android:text="https://yandex.ru/"
+            android:textAllCaps="false"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/buttonIMDb"
+            app:layout_constraintStart_toStartOf="@+id/buttonInstagramm"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonHomepage"
+            app:srcCompat="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/textViewFirstCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/colorCountryBackground"
+            android:text="USA"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/textViewSecondCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/colorCountryBackground"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Russia"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toEndOf="@+id/textViewFirstCountry"
+            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:layout_constraintVertical_bias="0.571" />
+
+
+        <TextView
+            android:id="@+id/textViewThirdCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/colorCountryBackground"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Germany"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toEndOf="@+id/textViewSecondCountry"
+            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:layout_constraintVertical_bias="0.571" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:srcCompat="@drawable/ic_company" />
+
+        <TextView
+            android:id="@+id/textViewFirstCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@color/colorCompanyBackground"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="New Regency Productions"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+        <TextView
+            android:id="@+id/textViewSecondCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@color/colorCompanyBackground"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginTop="5dp"
+            android:visibility="invisible"
+            android:text="Plan B Entertainment"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFirstCompany" />
+
+        <TextView
+            android:id="@+id/textViewThirdCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@color/colorCompanyBackground"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:visibility="invisible"
+            android:layout_marginStart="5dp"
+            android:text="Plan B Entertainment"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/textViewFirstCompany"
+            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+        <TextView
+            android:id="@+id/textViewFourthCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/colorCompanyBackground"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Plan B Entertainment"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="invisible"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewSecondCompany"
+            app:layout_constraintTop_toTopOf="@+id/textViewSecondCompany" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

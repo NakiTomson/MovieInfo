@@ -5,7 +5,10 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -18,6 +21,7 @@ import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateFive
 import com.example.dmiryz.ryzhov.movieinfo.utils.Configs.Companion.stateFoure
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.full_movie_list_fragment.*
 
 

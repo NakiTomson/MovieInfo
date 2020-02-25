@@ -28,6 +28,7 @@ class Configs {
         var myPositionOnViewPagersFragments:Int = 0
 
 
+
         //FullMovieFragment
         var PAGE_ONE = 1
         var PAGE_TWO = 1

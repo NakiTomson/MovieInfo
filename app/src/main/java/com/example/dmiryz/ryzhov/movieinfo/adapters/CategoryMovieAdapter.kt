@@ -46,14 +46,14 @@ class CategoryMovieAdapter(var type: Int) :
 
     inner class CategoryMovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(gameCategory: MovieCategoryEntity, position: Int) {
-            val movieCategory: TextView = itemView.movieCategory
+        fun bind(movieCategory: MovieCategoryEntity, position: Int) {
+            val movieCategoryTitle: TextView = itemView.movieCategory
             val nextFullListMovies: ImageButton = itemView.imageNextAllFilms
             val recycler: RecyclerView = itemView.recyclerViewCategory
 
-            movieCategory.text = gameCategory.categoryMovie
+            movieCategoryTitle.text = movieCategory.categoryMovie
             recycler.layoutManager = GridLayoutManager(itemView.context, 3)
-            val movieAdapter = MovieAdapter(gameCategory.movies.take(6))
+            val movieAdapter = MovieAdapter(movieCategory.movies.take(6))
             recycler.adapter = movieAdapter
             movieAdapter.movieSelectedListener = object : MovieAdapter.MovieSelectedListener {
                 override fun onMovieSelected(movie: MovieEntity, imageView: ImageView, title: TextView) {
@@ -65,47 +65,52 @@ class CategoryMovieAdapter(var type: Int) :
                 val action = MovieSectionFragmentDirections.actionNavMovieToFullMovieListFragment(
                     movieList = categroyMovieList[position]
                 )
-                it.findNavController().navigate(action)
+                val builder = NavOptions.Builder()
+                val navOptions = builder
+                    .setEnterAnim(R.animator.in_enter_anim)
+                    .setExitAnim(R.animator.in_exit_anim)
+                    .setPopEnterAnim(R.animator.out_enter_anim)
+                    .setPopExitAnim(R.animator.out_exit_anim)
+                    .build()
+                it.findNavController().navigate(action,navOptions)
             }
         }
 
-        fun bind2(gameCategory: MovieCategoryEntity, position: Int) {
-            val movieCategory: TextView = itemView.textCategoryMovie
+        fun bind2(movieCategory: MovieCategoryEntity, position: Int) {
+            val movieCategoryTitle: TextView = itemView.textCategoryMovie
             val movieOne: ImageView = itemView.imageMovieOne
             val movieTwo: ImageView = itemView.imageMovieTwo
             val movieThree: ImageView = itemView.imageMovieThree
             val roootInFullListMovie: CardView = itemView.rootCategoryCardWithMovie
 
-            movieCategory.text = gameCategory.categoryMovie
+            movieCategoryTitle.text = movieCategory.categoryMovie
 
             Picasso.get().
-                load(gameCategory.movies[0].posterPath)
+                load(movieCategory.movies[0].posterPath)
                 .placeholder(R.drawable.not_connect)
                 .noFade()
                 .into(movieOne)
 
             Picasso.get().
-                load(gameCategory.movies[1].posterPath)
+                load(movieCategory.movies[1].posterPath)
                 .placeholder(R.drawable.not_connect)
                 .noFade()
                 .into(movieTwo)
 
             Picasso.get().
-                load(gameCategory.movies[2].posterPath)
+                load(movieCategory.movies[2].posterPath)
                 .placeholder(R.drawable.not_connect)
                 .noFade()
                 .into(movieThree)
 
             roootInFullListMovie.setOnClickListener {
-                val builder = NavOptions.Builder()
-//                val extras = FragmentNavigatorExtras(
-//                    movieOne to gameCategory.movies[0].title
-//                )
-                val navOptions = builder.setEnterAnim(R.anim.nav_default_enter_anim).setExitAnim(R.anim.nav_default_exit_anim).build()
+                val extras = FragmentNavigatorExtras(
+                    movieCategoryTitle to movieCategory.categoryMovie
+                )
                 val action = MovieSectionFragmentDirections.actionNavMovieToFullMovieListFragment(
                     movieList = categroyMovieList[position]
                 )
-                it.findNavController().navigate(action,navOptions)
+                it.findNavController().navigate(action)
             }
         }
     }

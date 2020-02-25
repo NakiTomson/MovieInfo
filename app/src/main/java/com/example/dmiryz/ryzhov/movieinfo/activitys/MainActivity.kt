@@ -25,6 +25,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.defaul_toolbar.*
+import kotlinx.android.synthetic.main.defaul_toolbar.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -51,16 +51,8 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        val defaultToolbar = layoutInflater.inflate(
-            R.layout.defaul_toolbar,
-            appBarLayout,
-            false
-        ) as CollapsingToolbarLayout
-        val allMovieToolbar = layoutInflater.inflate(
-            R.layout.all_movie_toolbar,
-            appBarLayout,
-            false
-        ) as CollapsingToolbarLayout
+        val defaultToolbar = layoutInflater.inflate(R.layout.defaul_toolbar, appBarLayout, false) as CollapsingToolbarLayout
+        val allMovieToolbar = layoutInflater.inflate(R.layout.all_movie_toolbar, appBarLayout, false) as CollapsingToolbarLayout
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -74,9 +66,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
 //                R.id.SectionfullMovieListFragment -> {
-//                    appBarLayout.removeAllViews()
-//                    appBarLayout.addView(defaultToolbar)
-//                    setSupportActionBar(allMovieToolbar.findViewById(R.id.all_movies_toolbar))
+
 //                }
                 else -> {
                     appBarLayout.removeAllViews()
@@ -99,14 +89,8 @@ class MainActivity : AppCompatActivity() {
                     0 -> Configs.stateOne = getCurrentStateAppBar(sate = state.name)
                     1 -> Configs.stateTwo = getCurrentStateAppBar(sate = state.name)
                     2 -> Configs.stateThree = getCurrentStateAppBar(sate = state.name)
-                    3 -> {
-                        Configs.stateFoure = getCurrentStateAppBar(sate = state.name)
-                        Log.i("TAGStateFoureAppBar", stateFoure.toString())
-                    }
-                    4 -> {
-                        Configs.stateFive = getCurrentStateAppBar(sate = state.name)
-                        Log.i("TAGStateFiveAppBar", stateFive.toString())
-                    }
+                    3 ->  Configs.stateFoure = getCurrentStateAppBar(sate = state.name)
+                    4 -> Configs.stateFive = getCurrentStateAppBar(sate = state.name)
                     else -> throw Exception("it dosent work")
                 }
             }

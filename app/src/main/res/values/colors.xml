@@ -22,4 +22,13 @@
     <color name="transparent">#00000000</color>
 
     <color name="gander_gray">#E2E2E2</color>
+
+    <color name="colorInstagramBackground">#F44336</color>
+    <color name="colorFacebookBackground">#3F51B5</color>
+    <color name="colorTwitterBackground">#03A9F4</color>
+    <color name="colorIMDbBackground">#CF7C01</color>
+
+    <color name="colorCountryBackground">#4CAF50</color>
+
+    <color name="colorCompanyBackground">#B6B5B4</color>
 </resources>
