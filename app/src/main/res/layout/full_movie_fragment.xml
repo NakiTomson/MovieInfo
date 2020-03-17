@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.full_movie.full_movie.FullMovieFragment">
+    tools:context="com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie.full_movie.FullMovieFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFullMovies"
