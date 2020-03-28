@@ -63,6 +63,7 @@
     <string name="next">Next</string>
     <string name="skip_registration">skip</string>
     <string name="revenue">Сборы:</string>
+    <string name="forAllDescription">Hello content</string>
 
 
 </resources>

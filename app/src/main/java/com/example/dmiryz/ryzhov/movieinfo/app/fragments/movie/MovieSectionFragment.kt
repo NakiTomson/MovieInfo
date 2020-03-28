@@ -72,6 +72,7 @@ class MovieSectionFragment : Fragment() {
             val r = 1 - Math.abs(position)
             page.scaleY = (0.85f + r * 0.15f)
         }
+
         viewPager2.setPageTransformer(compositePageTransformer)
 
         activity?.findViewById<ImageView>(R.id.expandedImage)?.setImageResource(R.drawable.poster_real_size)

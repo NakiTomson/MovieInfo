@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.example.dmiryz.movie.fragments.exit.ExitViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.dmiryz.ryzhov.movieinfo.R
 
 
@@ -20,6 +19,6 @@ class ExitFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        shareViewModel = ViewModelProviders.of(this).get(ExitViewModel::class.java)
+        shareViewModel = ViewModelProvider(this).get(ExitViewModel::class.java)
     }
 }

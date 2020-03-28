@@ -5,7 +5,7 @@ import com.example.dmiryz.ryzhov.movieinfo.app.di.AppComponent
 import com.example.dmiryz.ryzhov.movieinfo.app.di.AppModule
 import com.example.dmiryz.ryzhov.movieinfo.app.di.DaggerAppComponent
 
-class App: Application() {
+class AppMovie: Application() {
 
     companion object{
         lateinit var appComponent:AppComponent
@@ -13,7 +13,7 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder().appModule(AppModule(app = this@App)).build()
+        appComponent = DaggerAppComponent.builder().appModule(AppModule(app = this@AppMovie)).build()
     }
 }
 

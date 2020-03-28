@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieDetailEntity
@@ -18,6 +18,7 @@ import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieReviewEntity
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieTraillerEntity
 import com.example.dmiryz.ryzhov.movieinfo.R
 import com.example.dmiryz.ryzhov.movieinfo.app.adapters.ReviewAdapter
+import com.example.dmiryz.ryzhov.movieinfo.app.fragments.movie.card.CardViewModel
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.API_YOUTUBE_KEY
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.stateAppBarExpandedFunction
 import com.google.android.material.appbar.AppBarLayout
@@ -55,7 +56,7 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
     }
 
     private fun initData() {
-        viewModelDetail = ViewModelProviders.of(this).get(DetailMovieViewModel::class.java)
+        viewModelDetail = ViewModelProvider(this).get(DetailMovieViewModel::class.java)
         activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(true)
         activity?.findViewById<FloatingActionButton>(R.id.fab)?.visibility = View.VISIBLE
         stateAppBarExpandedFunction = true
@@ -115,7 +116,7 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
 
         viewModelDetail.movieTrailler.observe(activity!!, Observer<MovieTraillerEntity> {
             video = it.keyTrailer
-            frag!!.initialize(API_YOUTUBE_KEY, this)
+            frag?.let { it.initialize(API_YOUTUBE_KEY, this) }
         })
 
     }

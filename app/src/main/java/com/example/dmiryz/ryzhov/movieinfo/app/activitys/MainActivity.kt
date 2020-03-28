@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
 //                R.id.SectionfullMovieListFragment -> {
-
+                //TODO hat
 //                }
                 else -> {
                     appBarLayout.removeAllViews()
@@ -116,6 +116,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+//    override fun onRestart() {
+//        super.onRestart()
+//        finish()
+//    }
+
 
     fun hideSystemBar(): Int {
         return (View.SYSTEM_UI_FLAG_LAYOUT_STABLE

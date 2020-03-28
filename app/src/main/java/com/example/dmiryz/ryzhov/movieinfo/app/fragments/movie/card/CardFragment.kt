@@ -1,6 +1,5 @@
 package com.example.dmiryz.ryzhov.movieinfo.app.fragments.movie.card
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,7 +34,7 @@ class CardFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        movieViewModel = ViewModelProviders.of(this).get(CardViewModel::class.java)
+        movieViewModel = ViewModelProvider(this).get(CardViewModel::class.java)
         genders = resources.getStringArray(R.array.genders).toList()
         downloadData()
 
@@ -70,33 +70,15 @@ class CardFragment : Fragment() {
                 movieViewModel.getMovieTv()
 
                 movieViewModel.moviePopular.observe(activity!!, Observer<List<MovieEntity>> {
-                    myCategoryAdapter.addMoviesCategory(
-                        MovieCategoryEntity(
-                            categoryMovie = "Популярные фильмы",
-                            movies = it,
-                            gender = ""
-                        )
-                    )
+                    myCategoryAdapter.addMoviesCategory(MovieCategoryEntity(categoryMovie = "Популярные фильмы", movies = it, gender = ""))
                 })
 
                 movieViewModel.movieRated.observe(activity!!, Observer<List<MovieEntity>> {
-                    myCategoryAdapter.addMoviesCategory(
-                        MovieCategoryEntity(
-                            categoryMovie = "Лучшие фильмы",
-                            movies = it,
-                            gender = ""
-                        )
-                    )
+                    myCategoryAdapter.addMoviesCategory(MovieCategoryEntity(categoryMovie = "Лучшие фильмы", movies = it,gender = ""))
                 })
 
                 movieViewModel.seriesTv.observe(activity!!, Observer<List<MovieEntity>> {
-                    myCategoryAdapter.addMoviesCategory(
-                        MovieCategoryEntity(
-                            categoryMovie = "Лучшие сериалы",
-                            movies = it,
-                            gender = ""
-                        )
-                    )
+                    myCategoryAdapter.addMoviesCategory(MovieCategoryEntity(categoryMovie = "Лучшие сериалы", movies = it, gender = ""))
                 })
             }
             1 -> {
@@ -107,12 +89,7 @@ class CardFragment : Fragment() {
                 movieViewModel.allCategoryMovie.observe(activity!!, Observer<List<MovieCategoryEntity>> {
                     val categoryMovie:MutableList<MovieCategoryEntity>  = ArrayList()
                     for ((index, value) in it.withIndex()) {
-                        categoryMovie.add(
-                            MovieCategoryEntity(
-                                categoryMovie = genders[index],
-                                movies = value.movies,
-                                gender = MovieCategory.values()[index].name
-                            )
+                        categoryMovie.add(MovieCategoryEntity(categoryMovie = genders[index], movies = value.movies, gender = MovieCategory.values()[index].name)
                         )
                     }
                     categoryMovie.forEach { movieCategory -> myCategoryAdapter.addMoviesCategory(movieCategory) }

@@ -5,13 +5,14 @@ import com.example.dmiryz.ryzhov.movieinfo.data.remote.providers.MovieProvider
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.SORT_BY_POPULARITY
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.TV_TYPE
 import com.example.dmiryz.ryzhov.movieinfo.domain.converters.MovieConverter
+import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity
 
 import kotlinx.coroutines.*
 import java.lang.Exception
 
-class MovieRepository(val movieConverter: MovieConverter, val movieProvider: MovieProvider) : IMovieRepository {
+class MovieRepositoryImpl(val movieConverter: MovieConverter, val movieProvider: MovieProvider) : IMovieRepository {
 
-    override suspend fun getMoviePopular(page: Int): Deferred<List<com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity>>{
+    override suspend fun getMoviePopular(page: Int): Deferred<List<MovieEntity>>{
         return try {
             val movies = movieProvider.getMovieListPopularity(page).await()
             GlobalScope.async {
@@ -23,7 +24,7 @@ class MovieRepository(val movieConverter: MovieConverter, val movieProvider: Mov
     }
 
 
-    override suspend fun getMovieRated(page: Int): Deferred<List<com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity>>{
+    override suspend fun getMovieRated(page: Int): Deferred<List<MovieEntity>>{
         return try {
             val movies = movieProvider.getMovieListTopRated(page).await()
             GlobalScope.async {
@@ -35,7 +36,7 @@ class MovieRepository(val movieConverter: MovieConverter, val movieProvider: Mov
     }
 
 
-    override suspend fun getMovieTv(page: Int): Deferred<List<com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity>>{
+    override suspend fun getMovieTv(page: Int): Deferred<List<MovieEntity>>{
         return try {
             val movies = movieProvider.getTVList(page).await()
             GlobalScope.async {
@@ -48,7 +49,7 @@ class MovieRepository(val movieConverter: MovieConverter, val movieProvider: Mov
 
 
 
-    override suspend fun getMovie(page: Int,movieType:String,gender:String,sortMovieType:String): Deferred<List<com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity>>{
+    override suspend fun getMovie(page: Int,movieType:String,gender:String,sortMovieType:String): Deferred<List<MovieEntity>>{
         return try {
             val movies = movieProvider.getMovie(page,movieType,gender,sortMovieType).await()
             GlobalScope.async {

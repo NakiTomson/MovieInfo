@@ -1,7 +1,6 @@
-package com.example.dmiryz.movie.fragments.favorite
+package com.example.dmiryz.ryzhov.movieinfo.app.fragments.favorite
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 
 class FavoriteViewModel : ViewModel() {

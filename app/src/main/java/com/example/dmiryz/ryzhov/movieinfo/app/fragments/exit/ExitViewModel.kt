@@ -1,7 +1,6 @@
-package com.example.dmiryz.movie.fragments.exit
+package com.example.dmiryz.ryzhov.movieinfo.app.fragments.exit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 
 class ExitViewModel : ViewModel() {

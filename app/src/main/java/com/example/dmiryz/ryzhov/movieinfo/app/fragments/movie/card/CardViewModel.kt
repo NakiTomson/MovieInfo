@@ -3,12 +3,9 @@ package com.example.dmiryz.ryzhov.movieinfo.app.fragments.movie.card
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.dmiryz.ryzhov.movieinfo.app.App
-import com.example.dmiryz.ryzhov.movieinfo.data.remote.providers.MovieProviderImpl
+import com.example.dmiryz.ryzhov.movieinfo.app.AppMovie
 
-import com.example.dmiryz.ryzhov.movieinfo.domain.converters.MovieConverter
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieCategoryEntity
-import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.MovieRepository
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity
 import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.IMovieRepository
 import kotlinx.coroutines.*
@@ -22,12 +19,11 @@ class CardViewModel(app:Application) : AndroidViewModel(app), CoroutineScope {
     private val job: Job = Job()
 
     init {
-        App.appComponent.inject(viewModel = this)
+        AppMovie.appComponent.inject(viewModel = this)
     }
 
     @Inject
     lateinit var moviesRepositoryImpl:IMovieRepository
-
 
     var moviePopular: MutableLiveData<List<MovieEntity>> = MutableLiveData()
     var movieRated: MutableLiveData<List<MovieEntity>> = MutableLiveData()

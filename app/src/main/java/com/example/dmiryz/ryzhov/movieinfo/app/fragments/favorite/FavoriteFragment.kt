@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.example.dmiryz.movie.fragments.favorite.FavoriteViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.dmiryz.ryzhov.movieinfo.R
 
 
@@ -19,7 +18,7 @@ class FavoriteFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        galleryViewModel = ViewModelProviders.of(this).get(FavoriteViewModel::class.java)
+        galleryViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
         super.onActivityCreated(savedInstanceState)
     }
 }

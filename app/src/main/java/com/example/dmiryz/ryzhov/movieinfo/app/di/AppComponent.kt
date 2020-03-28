@@ -15,4 +15,5 @@ interface AppComponent {
     fun inject(viewModel: FullMovieViewModel)
     fun inject(viewModel: DetailMovieViewModel)
 
+
 }

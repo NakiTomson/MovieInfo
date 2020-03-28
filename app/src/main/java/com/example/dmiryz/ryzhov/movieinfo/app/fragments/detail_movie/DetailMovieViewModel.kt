@@ -2,12 +2,10 @@ package com.example.dmiryz.ryzhov.movieinfo.app.fragments.detail_movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dmiryz.ryzhov.movieinfo.app.App
-import com.example.dmiryz.ryzhov.movieinfo.domain.converters.TraillerConverter
+import com.example.dmiryz.ryzhov.movieinfo.app.AppMovie
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieDetailEntity
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieReviewEntity
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieTraillerEntity
-import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.DetailMovieRepository
 import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.IDetailMovieRepository
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -20,7 +18,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     lateinit var heroesRepositoryImpl: IDetailMovieRepository
 
     init {
-        App.appComponent.inject(viewModel = this)
+        AppMovie.appComponent.inject(viewModel = this)
     }
 
     var movieDetail: MutableLiveData<MovieDetailEntity> = MutableLiveData()

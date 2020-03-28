@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.example.dmiryz.movie.fragments.settings.SettingsViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.dmiryz.ryzhov.movieinfo.R
 
 
@@ -20,6 +19,6 @@ class SettingsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        toolsViewModel = ViewModelProviders.of(this).get(SettingsViewModel::class.java)
+        toolsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
     }
 }

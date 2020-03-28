@@ -2,12 +2,9 @@ package com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie.full_movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dmiryz.ryzhov.movieinfo.app.App
-import com.example.dmiryz.ryzhov.movieinfo.data.remote.providers.MovieProviderImpl
-import com.example.dmiryz.ryzhov.movieinfo.domain.converters.MovieConverter
+import com.example.dmiryz.ryzhov.movieinfo.app.AppMovie
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieEntity
 import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.IMovieRepository
-import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.MovieRepository
 import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -19,7 +16,7 @@ class FullMovieViewModel : ViewModel(), CoroutineScope {
     private val job: Job = Job()
 
     init {
-        App.appComponent.inject(viewModel = this)
+        AppMovie.appComponent.inject(viewModel = this)
     }
 
     @Inject

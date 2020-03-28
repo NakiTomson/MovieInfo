@@ -9,7 +9,7 @@ import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.movie.MovieResult
 @Database(entities = [MovieResult::class], version = 1, exportSchema = false)
 abstract class MovieDateBase : RoomDatabase() {
 
-    abstract fun movieDao(): com.example.dmiryz.ryzhov.movieinfo.data.db.MovieDao
+    abstract fun movieDao(): MovieDao
 
     companion object {
         var INSTANCE: MovieDateBase? = null
@@ -18,9 +18,7 @@ abstract class MovieDateBase : RoomDatabase() {
         fun getInstance(context: Context): MovieDateBase? {
             if (INSTANCE == null){
                 synchronized(MovieDateBase::class){
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, MovieDateBase::class.java,
-                        DB_NAME
-                    ).build()
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, MovieDateBase::class.java, DB_NAME).build()
                 }
             }
             return INSTANCE
