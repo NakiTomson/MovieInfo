@@ -35,7 +35,7 @@ open class DetailMovieConverter() : MovieConverter() {
         )
     }
 
-    private fun checkGensers(number: Int): Int? {
+    fun checkGensers(number: Int): Int? {
         when (number) {
             0 -> if (number < countGenders) return 0
             1 -> if (number < countGenders) return 1
@@ -45,7 +45,7 @@ open class DetailMovieConverter() : MovieConverter() {
         return null
     }
 
-    private fun checkCountries(number: Int): Int? {
+    fun checkCountries(number: Int): Int? {
         when (number) {
             0 -> if (number < countCountries) return 0
             1 -> if (number < countCountries) return 1
@@ -54,7 +54,7 @@ open class DetailMovieConverter() : MovieConverter() {
         return null
     }
 
-    private fun checkCompanies(number: Int): Int? {
+    fun checkCompanies(number: Int): Int? {
         when (number) {
             0 -> if (number < countCompanies) return 0
             1 -> if (number < countCompanies) return 1

@@ -12,6 +12,7 @@ import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.SORT_BY_P
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.SORT_BY_RATED
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.TV_TYPE
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.VOTE_COUNT
+import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.movieImages.ImageMovieResponse
 import kotlinx.coroutines.Deferred
 
 
@@ -45,4 +46,14 @@ class MovieProviderImpl() :MovieProvider {
     override fun getMovie(page: Int,movieType:String,gender:String,sortMovieType:String): Deferred<MovieResponse> {
         return RetrofitFactory.getMovieService().getMoviesAll(movieType, API_KEY, LANGUAGE, sortMovieType, page, VOTE_COUNT,gender)
     }
+
+    override fun getImageMovie(id: Int): Deferred<ImageMovieResponse> {
+        return RetrofitFactory.getMovieService().getMoviesImageById(id, API_KEY)
+    }
+
+    override fun getSimilarMovie(id: Int): Deferred<MovieResponse> {
+        return RetrofitFactory.getMovieService().getSimiliarMovies(id, API_KEY, LANGUAGE,1) //TODO page need to change
+    }
+
+
 }

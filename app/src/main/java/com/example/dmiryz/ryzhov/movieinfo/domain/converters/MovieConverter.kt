@@ -19,9 +19,9 @@ open class MovieConverter {
             title = model.title!!,
             year = model.releaseDate!!,
             posterPath = BASE_POSTER_URL + SMALL_POSTER_SIZE + model.posterPath!!,
-            posterBackDropPath = BASE_POSTER_URL + BIG_POSTER_SIZE + model.backdropPath!!,
-            voteCount = model.voteCount,
+            posterBackDropPath = if (model.backdropPath != null)BASE_POSTER_URL + BIG_POSTER_SIZE + model.backdropPath else BASE_POSTER_URL + SMALL_POSTER_SIZE + model.posterPath,
             voteAverage = model.voteAverage,
+            voteCount = model.voteCount,
             overview = model.overview!!,
             id = model.id,
             typeMovie = MOVIE_TYPE

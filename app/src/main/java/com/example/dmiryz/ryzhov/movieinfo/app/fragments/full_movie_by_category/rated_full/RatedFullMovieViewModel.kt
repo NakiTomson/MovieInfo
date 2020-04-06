@@ -1,4 +1,4 @@
-package com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie.full_movie
+package com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie_by_category.rated_full
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class FullMovieViewModel : ViewModel(), CoroutineScope {
+class RatedFullMovieViewModel : ViewModel(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -22,22 +22,7 @@ class FullMovieViewModel : ViewModel(), CoroutineScope {
     @Inject
     lateinit var moviesRepositoryImpl: IMovieRepository
 
-    var moviePopular: MutableLiveData<List<MovieEntity>> = MutableLiveData()
-    var movieRated: MutableLiveData<List<MovieEntity>> = MutableLiveData()
-
-    fun getMoviePopular(page :Int,movieType:String,gender:String,typeSorted:String) {
-        launch(Dispatchers.Default) {
-            try {
-                val movies = moviesRepositoryImpl.getMovie(page,movieType,gender,typeSorted).await()
-                withContext(Dispatchers.Main){
-                    if (movies.isEmpty())return@withContext
-                    moviePopular.value = movies
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
+    var movieRatedList: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
     fun getMovieRated(page :Int,movieType:String,gender:String,typeSorted:String) {
         launch(Dispatchers.Default) {
@@ -45,7 +30,7 @@ class FullMovieViewModel : ViewModel(), CoroutineScope {
                 val movies = moviesRepositoryImpl.getMovie(page,movieType,gender,typeSorted).await()
                 withContext(Dispatchers.Main){
                     if (movies.isEmpty())return@withContext
-                    movieRated.value = movies
+                    movieRatedList.value = movies
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -58,4 +43,5 @@ class FullMovieViewModel : ViewModel(), CoroutineScope {
         super.onCleared()
         job.cancel()
     }
+
 }

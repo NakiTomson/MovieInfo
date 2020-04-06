@@ -1,8 +1,8 @@
-package com.example.dmiryz.ryzhov.movieinfo.app.fragments.movie.card
+package com.example.dmiryz.ryzhov.movieinfo.app.fragments.movie.movie_recomend
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.dmiryz.ryzhov.movieinfo.app.AppMovie
 
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieCategoryEntity
@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class CardViewModel(app:Application) : AndroidViewModel(app), CoroutineScope {
+class RecommededMovieViewModel(app:Application) : AndroidViewModel(app), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -24,11 +24,10 @@ class CardViewModel(app:Application) : AndroidViewModel(app), CoroutineScope {
 
     @Inject
     lateinit var moviesRepositoryImpl:IMovieRepository
-
     var moviePopular: MutableLiveData<List<MovieEntity>> = MutableLiveData()
     var movieRated: MutableLiveData<List<MovieEntity>> = MutableLiveData()
     var seriesTv: MutableLiveData<List<MovieEntity>> = MutableLiveData()
-    var allCategoryMovie: MutableLiveData<List<MovieCategoryEntity>> = MutableLiveData()
+
 
 
     fun getMoviePopular() {
@@ -72,19 +71,6 @@ class CardViewModel(app:Application) : AndroidViewModel(app), CoroutineScope {
         }
     }
 
-
-    fun getAllCategoryMovie() {
-        launch(Dispatchers.Default) {
-            try {
-                val categoryWithMovie = moviesRepositoryImpl.getMovieCategory(1,"movie").await()
-                withContext(Dispatchers.Main){
-                    allCategoryMovie.value = categoryWithMovie
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 
     override fun onCleared() {
         super.onCleared()

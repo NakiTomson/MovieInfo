@@ -1,4 +1,4 @@
-package com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie
+package com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie_by_category
 
 import android.os.Bundle
 import android.util.Log
@@ -39,17 +39,17 @@ class SectionFullMovieListFragment : Fragment() {
                 tab.text = values[position]
             }).attach()
 
+
+        //Определяем состояние AppBar
         viewPagerFullMovie.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 myPositionOnViewPagersFragments = position + 3
                 when (myPositionOnViewPagersFragments) {
                     3 -> {
                         activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(stateFoure)
-                        Log.i("TAGStateFoure", stateFoure.toString())
                     }
                     4 -> {
                         activity?.findViewById<AppBarLayout>(R.id.appBarLayout)?.setExpanded(stateFive)
-                        Log.i("TAGStateFive", stateFive.toString())
                     }
                     else -> throw Exception("xmmm...")
                 }

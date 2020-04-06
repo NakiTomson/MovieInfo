@@ -39,8 +39,7 @@ class MovieSectionFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         setData()
 
-        TabLayoutMediator(tabLayout, viewPager2,
-            TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+        TabLayoutMediator(tabLayout, viewPager2, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                 val values: Array<String> = context!!.resources.getStringArray(R.array.tabs)
                 tab.text = values[position]
             }).attach()

@@ -7,20 +7,21 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieDetailEntity
-import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieReviewEntity
-import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieTraillerEntity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.dmiryz.ryzhov.movieinfo.R
-import com.example.dmiryz.ryzhov.movieinfo.app.adapters.ReviewAdapter
-import com.example.dmiryz.ryzhov.movieinfo.app.fragments.movie.card.CardViewModel
+import com.example.dmiryz.ryzhov.movieinfo.app.adapters.*
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.API_YOUTUBE_KEY
 import com.example.dmiryz.ryzhov.movieinfo.app.utils.Configs.Companion.stateAppBarExpandedFunction
+import com.example.dmiryz.ryzhov.movieinfo.domain.models.*
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -28,6 +29,7 @@ import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragment
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import  com.example.dmiryz.ryzhov.movieinfo.app.adapters.RecommendedMovieAdapter.Companion.StrategyBind
 import kotlinx.android.synthetic.main.description_movie.*
 import kotlinx.android.synthetic.main.detail_movie_fragment.*
 import kotlinx.android.synthetic.main.movie_info.*
@@ -40,6 +42,8 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
     var frag: YouTubePlayerSupportFragment? = null
     lateinit var reviewAdapter: ReviewAdapter
     lateinit var video: String
+    lateinit var adapter:ImageSlideMovieAdapter
+    lateinit var myCategoryAdapter: RecommendedMovieAdapter
 
     val args: DetailMovieFragmentArgs by navArgs()
 
@@ -53,6 +57,26 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         super.onActivityCreated(savedInstanceState)
         initData()
         setData()
+
+        myCategoryAdapter.movieSelectedListener = object : RecommendedMovieAdapter.MovieSelectedListener {
+            override fun onMovieSelected(movie: MovieEntity, imageView: ImageView, title: TextView) {
+//                val extras = FragmentNavigatorExtras(
+//                    imageView to movie.posterPath,
+//                    title to  movie.title
+//                )
+//                val action = DetailMovieFragmentDirections.actionDetailMovieFragmentSelf(
+//                    titleMovie = movie.title,
+//                    posterPath = movie.posterPath,
+//                    backdropPath = movie.posterBackDropPath,
+//                    yearStart = movie.year,
+//                    voteCount = movie.voteCount,
+//                    voteAverage = movie.voteAverage.toFloat(),
+//                    overview = movie.overview,
+//                    id = movie.id
+//                )
+//                findNavController().navigate(action, extras)
+            }
+        }
     }
 
     private fun initData() {
@@ -73,7 +97,29 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         description.text = args.overview
         reasled_date.text = "Released: ${args.yearStart}"
         release_date.text = args.yearStart
+
+
+        //ImageSet
+        adapter = ImageSlideMovieAdapter()
+        viewPagerImages.adapter = adapter
+        viewPagerImages.clipToPadding = false
+        viewPagerImages.clipChildren = false
+        viewPagerImages.offscreenPageLimit = 3
+        viewPagerImages.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+        compositePageTransformer.addTransformer { page, position ->
+            val r = 1 - Math.abs(position)
+            page.scaleY = (0.85f + r * 0.15f)
+        }
+        viewPagerImages.setPageTransformer(compositePageTransformer)
+
+//        SimiliarMovie
+        myCategoryAdapter = RecommendedMovieAdapter(StrategyBind.bindRetedMovie)
+        recyclerSimiliarMovie.layoutManager = LinearLayoutManager(activity)
+        recyclerSimiliarMovie.adapter = myCategoryAdapter
     }
+
 
     private fun setData() {
         val moviePosterUri = args.posterPath
@@ -90,7 +136,7 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         Picasso.get()
             .load(movieBackPosterUri)
             .placeholder(R.drawable.poster_real_size)
-            .into(activity?.findViewById<ImageView>(R.id.expandedImage),object:Callback{
+            .into(activity?.findViewById(R.id.expandedImage),object:Callback{
                 override fun onSuccess() {
                         viewModelDetail.getDetailsMovie(args.id)
                         viewModelDetail.getReviewMovie(args.id)
@@ -108,6 +154,8 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
             buttonHomepage.text = it.homepage
             funSetInvisibleEntety(it)
             viewModelDetail.getTrailer(args.id)
+            viewModelDetail.getImageMovieById(args.id)
+            viewModelDetail.getSimilarMovieById(args.id)
         })
 
         viewModelDetail.movieRevies.observe(activity!!, Observer<List<MovieReviewEntity>> {
@@ -118,7 +166,12 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
             video = it.keyTrailer
             frag?.let { it.initialize(API_YOUTUBE_KEY, this) }
         })
-
+        viewModelDetail.movieImages.observe(activity!!, Observer {
+            adapter.addMovies(it)
+        })
+        viewModelDetail.similarMovie.observe(activity!!, Observer {
+            myCategoryAdapter.addMoviesCategory(MovieCategoryEntity("Похожие",it,""))
+        })
     }
 
     private fun funSetInvisibleEntety(it: MovieDetailEntity) {

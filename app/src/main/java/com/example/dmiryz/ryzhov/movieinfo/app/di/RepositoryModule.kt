@@ -1,6 +1,7 @@
 package com.example.dmiryz.ryzhov.movieinfo.app.di
 
 import com.example.dmiryz.ryzhov.movieinfo.data.remote.providers.MovieProvider
+import com.example.dmiryz.ryzhov.movieinfo.domain.converters.ImageMovieConverter
 import com.example.dmiryz.ryzhov.movieinfo.domain.converters.MovieConverter
 import com.example.dmiryz.ryzhov.movieinfo.domain.converters.TraillerConverter
 import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.DetailMovieRepositoryImpl
@@ -20,7 +21,7 @@ class RepositoryModule {
     }
 
     @Provides
-    fun provideMovieDetailRepository(converter: TraillerConverter,movieProvider: MovieProvider): IDetailMovieRepository {
+    fun provideMovieDetailRepository(converter: ImageMovieConverter, movieProvider: MovieProvider): IDetailMovieRepository {
         return DetailMovieRepositoryImpl(movieConverter = converter,movieProvider = movieProvider)
     }
 

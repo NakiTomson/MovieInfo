@@ -2,6 +2,7 @@ package com.example.dmiryz.ryzhov.movieinfo.data.remote.services
 
 import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.details.ResponseDetails
 import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.movie.MovieResponse
+import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.movieImages.ImageMovieResponse
 import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.review.ReviewResponse
 import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.trailer.TrailerResponse
 import kotlinx.coroutines.Deferred
@@ -55,4 +56,22 @@ interface MovieServices {
         @Query("vote_count.gte") vote_count: Int,
         @Query("with_genres") with_gender: String
     ): Deferred<MovieResponse>
+
+
+    @GET("/3/movie/{movie_id}/images?")
+    fun getMoviesImageById(
+        @Path("movie_id") id: Int,
+        @Query("api_key") api_key: String
+    ): Deferred<ImageMovieResponse>
+
+
+    @GET("/3/movie/{movie_id}/similar?")
+    fun getSimiliarMovies(
+        @Path("movie_id") id: Int,
+        @Query("api_key") api_key: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Deferred<MovieResponse>
+
+
 }

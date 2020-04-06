@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie.full_movie.FullMovieFragment">
+    tools:context="com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie_by_category.popular_full.PopularFullMovieFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFullMovies"
+        android:id="@+id/recyclerViewPopularFullMovies"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -3,7 +3,7 @@ package com.example.dmiryz.ryzhov.movieinfo.domain.converters
 import com.example.dmiryz.ryzhov.movieinfo.data.remote.models.trailer.TrailerResult
 import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieTraillerEntity
 
-class TraillerConverter : ReviewConverter() {
+open class TraillerConverter : ReviewConverter() {
 
      fun fromTraillerDateMovieToUI(trailler: TrailerResult): MovieTraillerEntity {
         return MovieTraillerEntity(

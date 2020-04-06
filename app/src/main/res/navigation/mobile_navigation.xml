@@ -89,10 +89,15 @@
             android:name="overview"
             app:argType="string"
             />
+
+        <action
+            android:id="@+id/action_detailMovieFragment_self"
+            app:destination="@id/detailMovieFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/SectionfullMovieListFragment"
-        android:name="com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie.SectionFullMovieListFragment"
+        android:name="com.example.dmiryz.ryzhov.movieinfo.app.fragments.full_movie_by_category.SectionFullMovieListFragment"
         android:label="Full List movie"
         tools:layout="@layout/full_movie_list_fragment">
         <argument

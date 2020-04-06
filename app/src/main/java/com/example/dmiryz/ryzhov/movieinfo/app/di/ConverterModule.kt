@@ -1,5 +1,6 @@
 package com.example.dmiryz.ryzhov.movieinfo.app.di
 
+import com.example.dmiryz.ryzhov.movieinfo.domain.converters.ImageMovieConverter
 import com.example.dmiryz.ryzhov.movieinfo.domain.converters.MovieConverter
 import com.example.dmiryz.ryzhov.movieinfo.domain.converters.TraillerConverter
 import dagger.Module
@@ -14,7 +15,7 @@ class ConverterModule {
     }
 
     @Provides
-    fun provideDetailConverter(): TraillerConverter {
-        return TraillerConverter()
+    fun provideDetailConverter(): ImageMovieConverter {
+        return ImageMovieConverter()
     }
 }

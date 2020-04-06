@@ -3,9 +3,7 @@ package com.example.dmiryz.ryzhov.movieinfo.app.fragments.detail_movie
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dmiryz.ryzhov.movieinfo.app.AppMovie
-import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieDetailEntity
-import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieReviewEntity
-import com.example.dmiryz.ryzhov.movieinfo.domain.models.MovieTraillerEntity
+import com.example.dmiryz.ryzhov.movieinfo.domain.models.*
 import com.example.dmiryz.ryzhov.movieinfo.domain.repositories.IDetailMovieRepository
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -15,7 +13,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
 
 
     @Inject
-    lateinit var heroesRepositoryImpl: IDetailMovieRepository
+    lateinit var movieDetailRepositoryImpl: IDetailMovieRepository
 
     init {
         AppMovie.appComponent.inject(viewModel = this)
@@ -25,6 +23,9 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     var movieRevies: MutableLiveData<List<MovieReviewEntity>> = MutableLiveData()
     var movieTrailler: MutableLiveData<MovieTraillerEntity> = MutableLiveData()
 
+    var movieImages: MutableLiveData<List<ImageMovieEntity>> = MutableLiveData()
+    var similarMovie: MutableLiveData<List<MovieEntity>> = MutableLiveData()
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
     private val job: Job = Job()
@@ -33,7 +34,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getDetailsMovie(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                val movieDetails = heroesRepositoryImpl.getMovieDetail(id).await()
+                val movieDetails = movieDetailRepositoryImpl.getMovieDetail(id).await()
                 withContext(Dispatchers.Main){
                     movieDetail.value = movieDetails
                 }
@@ -47,7 +48,7 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getReviewMovie(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                val reviews = heroesRepositoryImpl.getReviewMovie(id).await()
+                val reviews = movieDetailRepositoryImpl.getReviewMovie(id).await()
                 withContext(Dispatchers.Main){
                     movieRevies.value = reviews
                 }
@@ -61,9 +62,35 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     fun getTrailer(id: Int) {
         launch(Dispatchers.IO) {
             try {
-                val trailler = heroesRepositoryImpl.getTraillerMovie(id).await()
+                val trailler = movieDetailRepositoryImpl.getTraillerMovie(id).await()
                 withContext(Dispatchers.Main){
                     movieTrailler.value = trailler
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getImageMovieById(id: Int) {
+        launch(Dispatchers.IO) {
+            try {
+                val imagesList = movieDetailRepositoryImpl.getMovieImage(id).await()
+                withContext(Dispatchers.Main){
+                    movieImages.value = imagesList
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getSimilarMovieById(id: Int) {
+        launch(Dispatchers.IO) {
+            try {
+                val listSimilarMovie = movieDetailRepositoryImpl.getSimilarMovies(id).await()
+                withContext(Dispatchers.Main){
+                    similarMovie.value = listSimilarMovie
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

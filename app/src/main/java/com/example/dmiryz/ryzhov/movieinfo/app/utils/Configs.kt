@@ -62,8 +62,7 @@ class Configs {
         var API_YOUTUBE_KEY = "AIzaSyCkso3lU92eEjOHnhn6alaowRkD6i3gGXU"
 
 
-        var FragmentPosition: Int = 0
-        var FullFragmentPosition: Int = 0
+//        var FullFragmentPosition: Int = 0
 
         //состояния
         var stateOne:Boolean = true

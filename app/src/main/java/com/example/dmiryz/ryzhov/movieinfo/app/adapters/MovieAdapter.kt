@@ -18,10 +18,9 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     private var movies: MutableList<MovieEntity> = ArrayList()
-
-
     lateinit var onEnd: onEndListener
     var onMovieDounload: Boolean = true
+    var setFunctionDowloadMoreMovie: Boolean = true
     lateinit var movieSelectedListener: MovieSelectedListener
 
     interface MovieSelectedListener {
@@ -40,8 +39,7 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout._item_movie, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout._item_movie, parent, false)
         return MovieViewHolder(view)
     }
 
@@ -52,6 +50,7 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bindMovie(movie = movies[position])
         if (movies.size >= 20 && position > movies.size - 2 && onMovieDounload) {
+//            if (!setFunctionDowloadMoreMovie)return
             onEnd.onReachEnd()
             onMovieDounload = false
         }
