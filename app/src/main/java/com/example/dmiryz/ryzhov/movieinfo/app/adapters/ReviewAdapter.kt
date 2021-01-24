@@ -18,7 +18,6 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.review_item, parent, false)
         return ReviewHolder(view)
@@ -29,6 +28,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         holder.author.text = review.author
         holder.message.text = review.content
     }
+
 
     override fun getItemCount(): Int {
         return reviews.size

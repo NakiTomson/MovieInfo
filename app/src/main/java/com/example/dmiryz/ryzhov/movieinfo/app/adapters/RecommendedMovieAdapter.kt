@@ -48,7 +48,6 @@ class RecommendedMovieAdapter() : RecyclerView.Adapter<RecommendedMovieAdapter.C
     inner class CategoryMovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindRecommendedMovie(movieCategory: MovieCategoryEntity, position: Int) {
-
             val movieCategoryTitle: TextView = itemView.movieCategory
             val nextFullListMovies: ImageButton = itemView.imageNextAllFilms
             val recycler: RecyclerView = itemView.recyclerViewCategory

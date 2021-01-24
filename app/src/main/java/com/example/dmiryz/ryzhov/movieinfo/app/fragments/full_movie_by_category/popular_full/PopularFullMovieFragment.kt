@@ -30,7 +30,6 @@ class PopularFullMovieFragment() : Fragment() {
         fun newInstance() = PopularFullMovieFragment()
     }
 
-
     private lateinit var popularViewModel: PopularFullMovieViewModel
     private lateinit var movieInfo: MovieCategoryEntity
     private lateinit var adapterMovie: MovieAdapter

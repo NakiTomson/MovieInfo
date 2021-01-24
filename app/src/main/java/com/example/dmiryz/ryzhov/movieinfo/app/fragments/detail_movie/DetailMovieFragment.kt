@@ -169,9 +169,11 @@ class DetailMovieFragment : Fragment(), YouTubePlayer.OnInitializedListener {
         viewModelDetail.movieImages.observe(activity!!, Observer {
             adapter.addMovies(it)
         })
+
         viewModelDetail.similarMovie.observe(activity!!, Observer {
-            myCategoryAdapter.addMoviesCategory(MovieCategoryEntity("Похожие",it,""))
+            myCategoryAdapter.addMoviesCategory(MovieCategoryEntity("Similar",it,""))
         })
+
     }
 
     private fun funSetInvisibleEntety(it: MovieDetailEntity) {

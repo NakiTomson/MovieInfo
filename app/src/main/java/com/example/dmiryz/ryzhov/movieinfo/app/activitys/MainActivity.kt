@@ -1,9 +1,11 @@
 package com.example.dmiryz.ryzhov.movieinfo.app.activitys
 
-import androidx.appcompat.app.AppCompatActivity
+import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,7 +21,10 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.detail_movie_fragment.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +34,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        val anims = AnimationUtils.loadAnimation(this,R.anim.fadein);
+        drawer_layout.startAnimation(anims)
+
         decorView = window.decorView
         decorView.setOnSystemUiVisibilityChangeListener {
             if (it == 0) {
@@ -46,7 +56,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         val defaultToolbar = layoutInflater.inflate(R.layout.defaul_toolbar, appBarLayout, false) as CollapsingToolbarLayout
-        val allMovieToolbar = layoutInflater.inflate(R.layout.all_movie_toolbar, appBarLayout, false) as CollapsingToolbarLayout
+        val allMovieToolbar = layoutInflater.inflate(
+            R.layout.all_movie_toolbar,
+            appBarLayout,
+            false
+        ) as CollapsingToolbarLayout
+
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -56,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_exit
             ), drawerLayout
         )
+
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -83,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     0 -> Configs.stateOne = getCurrentStateAppBar(sate = state.name)
                     1 -> Configs.stateTwo = getCurrentStateAppBar(sate = state.name)
                     2 -> Configs.stateThree = getCurrentStateAppBar(sate = state.name)
-                    3 ->  Configs.stateFoure = getCurrentStateAppBar(sate = state.name)
+                    3 -> Configs.stateFoure = getCurrentStateAppBar(sate = state.name)
                     4 -> Configs.stateFive = getCurrentStateAppBar(sate = state.name)
                     else -> throw Exception("it dosent work")
                 }
@@ -131,4 +147,36 @@ class MainActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
+
+
+    /*\
+    *
+    *       var input: ByteArray = "https://www.youtube.com/".toByteArray()
+
+//        var keyBytes: ByteArray = "1".
+        val keyBytes =  byteArrayOf(1, 9, 1, 6, 2,9,1,3)
+
+        var ivBytes: ByteArray = byteArrayOf(1, 2, 3, 4, 5,6,7,8)
+
+        val key = SecretKeySpec(keyBytes, "DES")
+        val ivSpec = IvParameterSpec(ivBytes)
+        val cipher: Cipher = Cipher.getInstance("DES/CBC/PKCS5Padding")
+
+
+        //зашифровка
+        cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec)
+        val encrypted = ByteArray(cipher.getOutputSize(input.size))
+        var enc_len = cipher.update(input, 0, input.size, encrypted, 0)
+        enc_len += cipher.doFinal(encrypted, enc_len)
+
+
+
+        cipher.init(Cipher.DECRYPT_MODE, key, ivSpec)
+        val decrypted = ByteArray(cipher.getOutputSize(enc_len))
+        var dec_len = cipher.update(encrypted, 0, enc_len, decrypted, 0)
+        dec_len += cipher.doFinal(decrypted, dec_len)
+
+    *
+    *
+    * */
 }

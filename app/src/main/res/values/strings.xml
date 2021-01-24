@@ -11,15 +11,15 @@
 
 
     <string-array name="tabs">
-        <item>Рекомендуем</item>
-        <item>Фильмы</item>
-        <item>Сериалы</item>
+        <item>Recommend</item>
+        <item>Films</item>
+        <item>series</item>
     </string-array>
 
 
     <string-array name="tabs2">
-        <item>Популярное</item>
-        <item>Рейтенговое</item>
+        <item>Popular</item>
+        <item>Rating</item>
     </string-array>
 
     <string-array name="genders">
@@ -62,7 +62,7 @@
     <string name="log_in">Log In</string>
     <string name="next">Next</string>
     <string name="skip_registration">skip</string>
-    <string name="revenue">Сборы:</string>
+    <string name="revenue">revenue:</string>
     <string name="forAllDescription">Hello content</string>
 
 

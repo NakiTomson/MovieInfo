@@ -71,6 +71,7 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                 Picasso.get()
                     .load(movie.posterPath)
                     .placeholder(R.drawable.not_connect)
+                    .fit()
                     .noFade()
                     .into(this)
             }
@@ -79,7 +80,8 @@ class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                 movieSelectedListener.onMovieSelected(movie, poster,title)
             }
         }
-
     }
+
+
 
 }

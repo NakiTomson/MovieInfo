@@ -60,7 +60,6 @@ class RecommendedMovieFragment : Fragment() {
     }
 
     private fun downloadData() {
-
         myRecommededCategoryAdapter = RecommendedMovieAdapter()
         recyclerViewMovie.layoutManager = LinearLayoutManager(activity)
         recyclerViewMovie.adapter = myRecommededCategoryAdapter
@@ -71,7 +70,7 @@ class RecommendedMovieFragment : Fragment() {
         movieViewModel.moviePopular.observe(activity!!, Observer<List<MovieEntity>> {
             myRecommededCategoryAdapter.addMoviesCategory(
                 MovieCategoryEntity(
-                    categoryMovie = "Популярные фильмы",
+                    categoryMovie = "Popular films",
                     movies = it,
                     gender = ""
                 )
@@ -81,7 +80,7 @@ class RecommendedMovieFragment : Fragment() {
         movieViewModel.movieRated.observe(activity!!, Observer<List<MovieEntity>> {
             myRecommededCategoryAdapter.addMoviesCategory(
                 MovieCategoryEntity(
-                    categoryMovie = "Лучшие фильмы",
+                    categoryMovie = "Best films",
                     movies = it,
                     gender = ""
                 )
@@ -91,7 +90,7 @@ class RecommendedMovieFragment : Fragment() {
         movieViewModel.seriesTv.observe(activity!!, Observer<List<MovieEntity>> {
             myRecommededCategoryAdapter.addMoviesCategory(
                 MovieCategoryEntity(
-                    categoryMovie = "Лучшие сериалы",
+                    categoryMovie = "Best films",
                     movies = it,
                     gender = ""
                 )

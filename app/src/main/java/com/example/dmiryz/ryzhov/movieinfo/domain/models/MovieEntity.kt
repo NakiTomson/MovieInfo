@@ -13,4 +13,6 @@ data class MovieEntity(
     var overview:String,
     var typeMovie:String
 ) :Serializable{
+
+
 }

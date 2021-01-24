@@ -45,9 +45,7 @@ class CategoryMovieAdapter : RecyclerView.Adapter<CategoryMovieAdapter.CategoryM
     }
 
     inner class CategoryMovieHolder(itemCategory: View) : RecyclerView.ViewHolder(itemCategory) {
-
         fun bindCategory(movieCategory: MovieCategoryEntity, position: Int) {
-
             val movieCategoryTitle: TextView = itemView.textCategoryMovie
             val movieOne: ImageView = itemView.imageMovieOne
             val movieTwo: ImageView = itemView.imageMovieTwo

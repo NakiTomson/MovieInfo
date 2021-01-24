@@ -26,6 +26,8 @@ class DetailMovieViewModel : ViewModel(), CoroutineScope {
     var movieImages: MutableLiveData<List<ImageMovieEntity>> = MutableLiveData()
     var similarMovie: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
+
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
     private val job: Job = Job()
